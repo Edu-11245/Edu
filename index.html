@@ -1,245 +1,735 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>أكاديميا</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
-<title>الكورسات</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef3f1;--card:#fff;--ink:#10201d;--mut:#5d706b;--line:#d5e0dc;--board:#17352f;--board2:#10261f;--pencil:#f5c542;--err:#c0392b;--ok:#1d7a4f}
-@media(prefers-color-scheme:dark){:root{--bg:#0d1715;--card:#15231f;--ink:#e8f0ed;--mut:#8fa59f;--line:#263a35;--err:#ff8a7a;--ok:#5fd39b}}
-*{box-sizing:border-box}
-body{margin:0;font-family:"Cairo",system-ui,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
-a{color:inherit}
-.nav{background:linear-gradient(160deg,var(--board),var(--board2));color:#f1f5f2;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;border-bottom:6px solid #7a5a35;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.brand{font-family:"Reem Kufi","Cairo",sans-serif;font-weight:700;font-size:1.4rem;color:#fff;text-decoration:none;margin-inline-end:auto}
-.nav a.l{color:#c4d6d0;text-decoration:none;font-weight:600}
-.hero{background:linear-gradient(160deg,var(--board),var(--board2));color:#f1f5f2;padding:44px 20px 70px;text-align:right}
-.hero>div{max-width:1000px;margin:0 auto}
-.hero h1{font-family:"Reem Kufi","Cairo",sans-serif;font-size:clamp(2rem,6vw,3.4rem);margin:0 0 10px;line-height:1.25}
-.hero p{margin:0 0 22px;max-width:36rem;color:#c4d6d0;font-size:1.1rem;line-height:1.8}
-.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 50px}
-.up{margin-top:-36px}
-h2{margin:26px 0 12px;font-size:1.25rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
-.course{padding:0;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;border-top:5px solid var(--pencil)}
-.course .im{aspect-ratio:16/9;width:100%;object-fit:cover;background:linear-gradient(160deg,var(--board),var(--board2));display:flex;align-items:center;justify-content:center;color:var(--pencil);font:700 3rem "Reem Kufi",sans-serif}
-.course .tx{padding:14px}.course h3{margin:0 0 6px}.course p{margin:0;color:var(--mut);font-size:.93rem;line-height:1.7}
-.btn{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:8px;padding:9px 15px;background:var(--board);color:#fff;text-decoration:none;display:inline-block}
-.btn.pencil{background:var(--pencil);color:#2a2200}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.nav .btn.ghost{color:#fff;border-color:#ffffff66}
-.btn.danger{background:transparent;color:var(--err);border:1px solid var(--err)}
-.btn:disabled{opacity:.6;cursor:wait}
-:focus-visible{outline:3px solid var(--pencil);outline-offset:2px}
-label{display:block;font-weight:600;margin:0 0 4px;font-size:.92rem}
-input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;margin-bottom:10px}
-select option{color:#000}
-dialog{border:0;border-radius:14px;padding:18px;width:min(560px,94vw);background:var(--card);color:var(--ink);max-height:92vh;overflow:auto}
-dialog::backdrop{background:rgba(5,15,12,.65)}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.mut{color:var(--mut)}.empty{color:var(--mut);padding:16px 0}
-.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.85rem;font-weight:700;background:var(--line)}
-.chip.ok{background:var(--ok);color:#fff}.chip.no{background:var(--err);color:#fff}.chip.wait{background:var(--pencil);color:#2a2200}
-.lec{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
-.lec:last-child{border:0}
-.video{position:relative;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.pm{border:1px dashed var(--mut);border-radius:10px;padding:10px;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
-.num{font:700 1.15rem ui-monospace,Consolas,monospace;direction:ltr;letter-spacing:1px}
-.prev{max-width:100%;max-height:260px;border-radius:8px;margin-bottom:10px}
-.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;margin:auto;padding:12px 16px;border-radius:10px;color:#fff;font-weight:600;z-index:99;text-align:center}
-.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:640px}
-th,td{text-align:right;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-size:.9rem}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.tabs .btn[aria-selected=true]{background:var(--pencil);color:#2a2200}
+:root{--ink:#0f172a;--mut:#64748b;--line:#e8ebf3;--soft:#f6f7fc;--p:#4f46e5;--p2:#7c3aed;--ps:#eef0ff;--acc:#f59e0b;--ok:#059669;--err:#dc2626;
+--sh:0 1px 2px rgba(15,23,42,.04),0 12px 32px -10px rgba(79,70,229,.16);--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"IBM Plex Sans Arabic","Readex Pro",system-ui,Tahoma,sans-serif;color:var(--ink);background:#fff;line-height:1.75;-webkit-font-smoothing:antialiased;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0)}
+h1,h2,h3,h4,.brand{font-family:"Readex Pro","IBM Plex Sans Arabic",sans-serif;line-height:1.35}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
 .hide{display:none!important}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.mut{color:var(--mut)}
+.ic{width:1.15em;height:1.15em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
-.foot{text-align:center;padding:26px 16px calc(26px + env(safe-area-inset-bottom,0px));color:var(--mut)}.foot a{color:var(--mut)}
-</style></head><body>
-<div id="nav"></div>
-<div id="view"><main class="wrap"><p class="empty">جاري التحميل…</p></main></div>
-<footer class="foot"><a href="admin.html">دخول المعلمة</a></footer>
-<dialog id="dlg"><div id="db"></div><div class="row" style="margin-top:12px"><button class="btn ghost" id="cl">إغلاق</button></div></dialog>
+/* ---------- الخلفية ---------- */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#fff;pointer-events:none}
+.bg i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.6;animation:float 20s ease-in-out infinite}
+.bg i:nth-child(1){width:46vw;height:46vw;background:#dfe3ff;top:-14vw;inset-inline-end:-10vw}
+.bg i:nth-child(2){width:38vw;height:38vw;background:#f3e1ff;bottom:-16vw;inset-inline-start:-8vw;animation-delay:-7s}
+.bg i:nth-child(3){width:24vw;height:24vw;background:#ffeccc;top:46%;inset-inline-start:34%;opacity:.35;animation-delay:-12s}
+.bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(#c9cfe8 1px,transparent 1px);background-size:28px 28px;opacity:.4;-webkit-mask-image:linear-gradient(#000,transparent 65%);mask-image:linear-gradient(#000,transparent 65%)}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(3vw,2vw) scale(1.06)}66%{transform:translate(-2vw,3vw) scale(.96)}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes ring{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+@keyframes bar{0%{width:8%}100%{width:92%}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shine{to{background-position:-200% 0}}
+.rise{animation:rise .7s var(--ease) both}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- عناصر عامة ---------- */
+.btn{font-weight:600;font-size:.95rem;border:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 10px 22px -10px rgba(79,70,229,.7);transition:transform .25s var(--ease),box-shadow .25s,opacity .2s,background .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(79,70,229,.75)}
+.btn:active{transform:scale(.97)}
+.btn.soft{background:var(--ps);color:var(--p);box-shadow:none}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{background:var(--soft);border-color:#d3d8ee}
+.btn.danger{background:#fff;color:var(--err);border:1px solid #fbd3d3;box-shadow:none}
+.btn.danger:hover{background:#fff5f5}
+.btn.sm{padding:7px 13px;font-size:.85rem;border-radius:10px}
+.btn.ico{padding:8px;border-radius:10px}
+.btn.block{width:100%}
+.btn:disabled{opacity:.55;cursor:wait;transform:none}
+.btn.load::after{content:"";width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-top-color:transparent;animation:spin .7s linear infinite}
+:focus-visible{outline:3px solid rgba(79,70,229,.4);outline-offset:2px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:.85rem;font-weight:600;color:#334155;margin-bottom:6px}
+.ib{position:relative}
+.ib>.ic{position:absolute;inset-inline-start:14px;top:50%;translate:0 -50%;color:#94a3b8;pointer-events:none;transition:color .2s}
+.ib:focus-within>.ic{color:var(--p)}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+.ib input{padding-inline-start:44px}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--p);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+input::placeholder,textarea::placeholder{color:#a3adc2}
+input[type=file]{padding:9px;font-size:.9rem}
+.err{color:var(--err);font-weight:600;font-size:.88rem;min-height:1.4em}
+.okm{color:var(--ok)}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.end{justify-content:flex-end}.row.between{justify-content:space-between}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 11px;border-radius:99px;font-size:.8rem;font-weight:600;background:var(--soft);color:var(--mut);border:1px solid var(--line)}
+.chip.ok{background:#e8f8f1;color:var(--ok);border-color:#c5ecdb}
+.chip.no{background:#fdecec;color:var(--err);border-color:#f8cfcf}
+.chip.wait{background:#fff5df;color:#b45309;border-color:#fbe3ac}
+.chip.pr{background:var(--ps);color:var(--p);border-color:#dadcff}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font:700 1.1rem "Readex Pro",sans-serif;flex:none;overflow:hidden;box-shadow:0 6px 14px -6px rgba(15,23,42,.35)}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.sm{width:28px;height:28px;font-size:.8rem;box-shadow:none}
+.av.lg{width:84px;height:84px;font-size:2rem}
+.av.xl{width:116px;height:116px;font-size:2.8rem;border:4px solid #fff}
+.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;color:#fff;box-shadow:0 10px 20px -8px rgba(79,70,229,.7)}
+.logo .ic{width:22px;height:22px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.25rem}
+.empty{text-align:center;color:var(--mut);padding:44px 16px;border:1.5px dashed #d6dbee;border-radius:20px;background:rgba(255,255,255,.6)}
+.empty .ic{width:34px;height:34px;color:#b4bcd6;margin-bottom:8px}
+.sk{border-radius:20px;height:250px;background:linear-gradient(100deg,#f3f4fa 40%,#fff 50%,#f3f4fa 60%);background-size:200% 100%;animation:shine 1.4s linear infinite}
+
+/* ---------- صفحة الدخول ---------- */
+.auth{flex:1;display:grid;grid-template-columns:minmax(0,470px) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center;max-width:1240px;margin:0 auto;width:100%;padding:clamp(20px,4vw,48px)}
+.auth-card{padding:clamp(22px,4vw,38px)}
+.auth h1{font-size:clamp(1.6rem,3.4vw,2.1rem);margin:22px 0 6px}
+.auth .sub{color:var(--mut);margin-bottom:22px}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:16px}
+.seg button{position:relative;z-index:1;background:none;border:0;padding:10px;cursor:pointer;color:var(--mut);font-weight:600;display:flex;gap:8px;align-items:center;justify-content:center;transition:color .3s}
+.seg button[aria-pressed=true]{color:var(--p)}
+.seg .th{position:absolute;z-index:0;top:4px;bottom:4px;width:calc(50% - 4px);inset-inline-start:4px;background:#fff;border-radius:10px;box-shadow:0 3px 10px rgba(15,23,42,.1);transition:inset-inline-start .45s var(--ease)}
+.seg[data-v="1"] .th{inset-inline-start:50%}
+.fold{display:grid;grid-template-rows:1fr;transition:grid-template-rows .45s var(--ease),opacity .35s}
+.fold>div{overflow:hidden;min-height:0}
+.fold.off{grid-template-rows:0fr;opacity:0}
+.link{background:none;border:0;color:var(--p);font-weight:600;cursor:pointer;padding:0}
+.link:hover{text-decoration:underline}
+.show{position:relative;min-height:560px;border-radius:34px;background:linear-gradient(160deg,#fff,#eef0ff 55%,#f6e9ff);border:1px solid var(--line);box-shadow:var(--sh);overflow:hidden;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.show h2{font-size:clamp(1.6rem,2.6vw,2.2rem)}
+.show h2 em,.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--p),var(--p2) 60%,#d946ef);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mock{position:relative;aspect-ratio:16/9;border-radius:22px;background:linear-gradient(135deg,#4f46e5,#7c3aed 60%,#c026d3);box-shadow:0 30px 50px -24px rgba(79,70,229,.7);display:grid;place-items:center;overflow:hidden;transform:rotate(-2deg);transition:transform .6s var(--ease)}
+.show:hover .mock{transform:rotate(0)}
+.mock::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.35),transparent 45%)}
+.mock .pl{position:relative;width:74px;height:74px;border-radius:50%;background:#fff;color:var(--p);display:grid;place-items:center}
+.mock .pl .ic{width:30px;height:30px;fill:currentColor}
+.mock .pl::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #fff;animation:ring 2s ease-out infinite}
+.mock .pb{position:absolute;inset-inline:18px;bottom:16px;height:6px;border-radius:9px;background:rgba(255,255,255,.3);overflow:hidden}
+.mock .pb::after{content:"";display:block;height:100%;background:#fff;border-radius:9px;animation:bar 9s ease-in-out infinite alternate}
+.fl{position:absolute;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 16px;box-shadow:0 18px 36px -16px rgba(15,23,42,.3);font-weight:600;font-size:.9rem;animation:bob 6s ease-in-out infinite}
+.fl .ic{color:var(--p);width:20px;height:20px}
+.fl.a{top:28%;inset-inline-end:-6px;animation-delay:-1s}
+.fl.b{bottom:30%;inset-inline-start:-8px;animation-delay:-3s}
+.fl.c{top:7%;inset-inline-start:34px;animation-delay:-4.5s}
+.dots{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:.9rem}
+.dots span{display:flex;align-items:center;gap:7px}.dots .ic{color:var(--ok)}
+
+/* ---------- الشريط العلوي ---------- */
+.nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0)}
+.nav>div{max-width:1180px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:18px}
+.nav .links{display:flex;gap:4px;margin-inline-end:auto}
+.nav .links a{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:11px;color:var(--mut);font-weight:600;font-size:.93rem;transition:background .2s,color .2s}
+.nav .links a:hover{background:var(--soft);color:var(--ink)}
+.nav .links a.on{background:var(--ps);color:var(--p)}
+.me{display:flex;align-items:center;gap:10px}
+.me b{display:block;font-size:.88rem;line-height:1.2}.me small{color:var(--mut);font-size:.75rem}
+.me .av{width:38px;height:38px;font-size:.95rem}
+
+/* ---------- الصفحات ---------- */
+main{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:30px 20px 56px}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center;padding:clamp(24px,4vw,46px);border-radius:32px;background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(238,240,255,.85));border:1px solid var(--line);box-shadow:var(--sh);margin-bottom:12px}
+.eyebrow{display:inline-flex;gap:7px;align-items:center;background:var(--ps);color:var(--p);font-weight:600;font-size:.85rem;padding:5px 14px;border-radius:99px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);margin:14px 0 10px}
+.hero p{color:var(--mut);max-width:34rem;margin-bottom:20px}
+.srch{position:relative;max-width:460px}
+.srch .ic{position:absolute;inset-inline-start:16px;top:50%;translate:0 -50%;color:#94a3b8}
+.srch input{padding:14px 16px;padding-inline-start:46px;border-radius:16px;box-shadow:0 10px 24px -14px rgba(79,70,229,.4)}
+.hstats{display:grid;gap:12px}
+.hstats>div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:transform .3s var(--ease)}
+.hstats>div:hover{transform:translateX(-6px)}
+.hstats b{font:700 1.7rem "Readex Pro",sans-serif;color:var(--p);min-width:2.4ch}
+.sec{margin-top:40px}
+.sh{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}
+.sh h2{font-size:1.4rem;display:flex;align-items:center;gap:10px}
+.sh h2::before{content:"";width:6px;height:24px;border-radius:9px;background:linear-gradient(var(--p),var(--p2))}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.cc{display:flex;flex-direction:column;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s}
+.cc:hover{transform:translateY(-6px);box-shadow:0 26px 44px -18px rgba(79,70,229,.32)}
+.cv{position:relative;aspect-ratio:16/9;overflow:hidden;display:grid;place-items:center;color:#fff;font:700 3.2rem "Readex Pro",sans-serif}
+.cv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.cc:hover .cv img{transform:scale(1.07)}
+.cv .pill{position:absolute;inset-inline-end:12px;bottom:12px;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--p);display:grid;place-items:center;box-shadow:0 8px 18px -6px rgba(0,0,0,.35);transform:scale(.8);opacity:0;transition:.35s var(--ease)}
+.cv .pill .ic{fill:currentColor}
+.cc:hover .pill{transform:none;opacity:1}
+.cb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.cb h3{font-size:1.05rem}
+.cb p{color:var(--mut);font-size:.9rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.cm{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;margin-top:6px;color:#334155}
+.tscroll{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);gap:16px;overflow-x:auto;padding:6px 4px 16px;scroll-snap-type:x proximity}
+.tc{padding:22px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;scroll-snap-align:start;transition:transform .4s var(--ease),box-shadow .4s}
+.tc:hover{transform:translateY(-6px);box-shadow:0 26px 44px -18px rgba(79,70,229,.32)}
+.tc .av{margin-bottom:8px}.tc p{color:var(--mut);font-size:.88rem;margin-bottom:8px}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--mut);font-weight:600;font-size:.9rem;margin-bottom:14px}
+.back:hover{color:var(--p)}.flip{transform:scaleX(-1)}
+.cover{border-radius:28px;overflow:hidden;position:relative;aspect-ratio:21/8;min-height:180px;display:grid;place-items:center;color:#fff;font:700 4rem "Readex Pro",sans-serif;margin-bottom:-52px}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(15,23,42,.25))}
+.cinfo{position:relative;margin-inline:clamp(10px,3vw,30px);padding:clamp(18px,3vw,28px)}
+.cinfo h1{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:6px}
+.cinfo>p{color:var(--mut);margin:8px 0 14px;max-width:46rem}
+.lec{display:flex;gap:14px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap;transition:background .2s}
+.lec:last-child{border:0}.lec:hover{background:#fafbff}
+.lec .n{width:38px;height:38px;border-radius:12px;background:var(--ps);color:var(--p);display:grid;place-items:center;font:700 .95rem "Readex Pro",sans-serif;flex:none}
+.lec.lk .n{background:var(--soft);color:#94a3b8}
+.lec .li{flex:1;min-width:180px}.lec .li small{display:block;color:var(--mut);line-height:1.5}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;padding:5px;background:var(--soft);border:1px solid var(--line);border-radius:16px;width:fit-content;max-width:100%}
+.tabs a{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:12px;font-weight:600;color:var(--mut);font-size:.92rem;transition:.25s}
+.tabs a.on{background:#fff;color:var(--p);box-shadow:0 3px 10px rgba(15,23,42,.08)}
+.tabs .cnt{background:var(--err);color:#fff;border-radius:99px;font-size:.72rem;padding:0 7px;line-height:1.5}
+.rq{padding:18px 20px;margin-bottom:14px}
+.rq .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px 18px;margin:12px 0 14px;font-size:.9rem}
+.rq .kv span{color:var(--mut);display:block;font-size:.76rem}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{text-align:start;padding:12px 16px;border-bottom:1px solid var(--line);font-size:.9rem}
+th{color:var(--mut);font-size:.8rem;background:var(--soft);font-weight:600}
+tr:last-child td{border:0}
+.pm{border:1.5px dashed #cfd5ea;border-radius:14px;padding:12px 14px;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.mono{font:700 1.1rem ui-monospace,Consolas,monospace;direction:ltr;letter-spacing:1.5px;display:inline-block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.pad{padding:clamp(18px,3vw,28px)}
+.pad h3{margin-bottom:14px}
+
+/* ---------- نافذة ---------- */
+dialog{border:0;border-radius:26px;padding:0;width:min(520px,94vw);max-height:92vh;max-height:92dvh;box-shadow:0 40px 90px -24px rgba(15,23,42,.5);color:var(--ink);animation:pop .4s var(--ease);margin:auto}
+dialog::backdrop{background:rgba(15,23,42,.5);backdrop-filter:blur(7px);animation:fade .3s}
+#mb{padding:24px;overflow:auto;max-height:92vh;max-height:92dvh}
+.mh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.x{width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;color:var(--mut);transition:.2s;flex:none}
+.x:hover{background:var(--soft);color:var(--ink)}
+dialog.wide{width:min(980px,96vw);background:#0a0f1f;color:#fff}
+dialog.wide .x{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#fff}
+dialog.wide #mb{padding:18px}
+.vbox{position:relative;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.vbox iframe,.vbox video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.vtop{position:absolute;inset:0 0 auto 0;height:58px;z-index:3}
+.wm{position:absolute;z-index:4;pointer-events:none;color:rgba(255,255,255,.55);font-weight:600;font-size:clamp(.7rem,1.6vw,.95rem);text-shadow:0 1px 3px rgba(0,0,0,.8);padding:3px 10px;background:rgba(0,0,0,.18);border-radius:8px;transition:top 2.5s ease-in-out,inset-inline-start 2.5s ease-in-out;direction:ltr;white-space:nowrap}
+.vmask{position:absolute;inset:0;z-index:6;background:#0a0f1f;color:#cbd5e1;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s;text-align:center;padding:20px}
+.vmask .ic{width:34px;height:34px}
+.vbox.cover .vmask{opacity:1;pointer-events:auto}
+.vnote{display:flex;gap:8px;align-items:center;color:#94a3b8;font-size:.82rem;margin-top:12px}
+.vnote .ic{color:#34d399}
+
+/* ---------- الفوتر ---------- */
+.foot{margin-top:auto;border-top:1px solid var(--line);background:rgba(255,255,255,.75);backdrop-filter:blur(10px)}
+.foot .fw{max-width:1180px;margin:0 auto;padding:38px 20px 22px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:28px}
+.foot p{color:var(--mut);font-size:.88rem;margin-top:12px;max-width:21rem}
+.foot h4{font-size:.92rem;margin-bottom:10px}
+.foot a,.foot li{display:block;color:var(--mut);font-size:.88rem;padding:3px 0;list-style:none;transition:color .2s}
+.foot a:hover{color:var(--p)}
+.foot .cp{max-width:1180px;margin:0 auto;padding:14px 20px calc(18px + env(safe-area-inset-bottom,0));border-top:1px solid var(--line);color:#94a3b8;font-size:.82rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.toasts{position:fixed;inset-inline:16px;bottom:calc(18px + env(safe-area-inset-bottom,0));display:flex;flex-direction:column;align-items:center;gap:8px;z-index:100;pointer-events:none}
+.toast{pointer-events:auto;display:flex;gap:10px;align-items:center;background:#0f172a;color:#fff;padding:12px 18px;border-radius:14px;font-weight:600;font-size:.92rem;box-shadow:0 18px 40px -12px rgba(15,23,42,.5);animation:pop .4s var(--ease)}
+.toast.bad{background:var(--err)}.toast .ic{color:#34d399}.toast.bad .ic{color:#fff}
+.splash{flex:1;display:grid;place-items:center}
+.splash .logo{width:64px;height:64px;border-radius:20px;animation:bob 1.6s ease-in-out infinite}
+@media(max-width:900px){.auth{grid-template-columns:1fr}.show{display:none}.hero{grid-template-columns:1fr}.hstats{grid-template-columns:repeat(3,1fr)}.hstats>div{flex-direction:column;gap:0;text-align:center;padding:12px 6px}.two{grid-template-columns:1fr}.foot .fw{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.nav>div{flex-wrap:wrap;gap:8px 12px;padding:10px 14px}.nav .links{order:3;width:100%;margin:0;overflow-x:auto}.me div{display:none}.cover{margin-bottom:-36px}main{padding:20px 14px 44px}.foot .fw{grid-template-columns:1fr}}
+@media print{body{display:none!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17v4M21 19h-4"/></symbol>
+<symbol id="i-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+</svg>
+
+<div class="bg"><i></i><i></i><i></i></div>
+<div id="app"><div class="splash"><div class="logo"><svg class="ic"><use href="#i-cap"/></svg></div></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<dialog id="dlg"><div id="mb"></div></dialog>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc, query, where, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getDatabase, ref, get, set, update, push, onValue, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
+/* ============ إعدادات ============ */
+const PLATFORM = "أكاديميا";            // اسم المنصة (غيّره براحتك)
 const cfg = {
   apiKey: "AIzaSyCULtaLm5UC36yBNibAFI4Lq2AebN6YvjE",
   authDomain: "education-ea665.firebaseapp.com",
+  // انسخ الرابط من Firebase Console > Realtime Database (فوق الداتا)، ولو مختلف غيّره هنا
+  databaseURL: "https://education-ea665-default-rtdb.firebaseio.com",
   projectId: "education-ea665",
   storageBucket: "education-ea665.firebasestorage.app",
   messagingSenderId: "569337898526",
   appId: "1:569337898526:web:7cc09f35b3f357fb7b300f"
 };
-const app = initializeApp(cfg), auth = getAuth(app), db = getFirestore(app);
+const EMAILJS = { service: "service_6boa519", publicKey: "_YXlKwxDWLdxG-_DB", approval: "template_g9kjv6u", welcome: "template_898wgo5" };
+
+const app = initializeApp(cfg), auth = getAuth(app), db = getDatabase(app);
+
+/* ============ أدوات ============ */
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const money = n => n ? n + " ج.م" : "مجاني";
-function embed(url){
-  let m = url.match(/drive\.google\.com\/file\/d\/([^/?]+)/); if(m) return `https://drive.google.com/file/d/${m[1]}/preview`;
-  m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); if(m) return `https://www.youtube-nocookie.com/embed/${m[1]}?rel=0&modestbranding=1`;
-  return url;
+const ic = (n, c = "") => `<svg class="ic ${c}"><use href="#i-${n}"/></svg>`;
+const money = n => n ? `${n} ج.م` : "مجاني";
+const ini = s => ((s || "?").trim()[0] || "?");
+const first = s => (s || "").trim().split(/\s+/)[0];
+const hue = s => [...String(s)].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
+const grad = s => `linear-gradient(135deg,hsl(${hue(s)} 78% 60%),hsl(${(hue(s) + 50) % 360} 78% 56%))`;
+const arr = o => Object.entries(o || {}).map(([id, v]) => ({ id, ...v }));
+const day = t => t ? new Date(t).toLocaleString("ar-EG", { dateStyle: "medium", timeStyle: "short" }) : "—";
+const go = h => { location.hash = h };
+const genCode = () => { const a = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", b = crypto.getRandomValues(new Uint32Array(8)); return [...b].map(x => a[x % a.length]).join("") };
+
+function toast(t, ok = true) {
+  const d = document.createElement("div"); d.className = "toast" + (ok ? "" : " bad");
+  d.innerHTML = ic(ok ? "check" : "x") + `<span>${esc(t)}</span>`; $("toasts").append(d);
+  setTimeout(() => { d.style.transition = ".4s"; d.style.opacity = 0; setTimeout(() => d.remove(), 400) }, 3800);
 }
-function toast(t, ok = true){
-  const d = document.createElement("div"); d.className = "toast"; d.setAttribute("role","status");
-  d.style.background = ok ? "var(--ok)" : "var(--err)"; d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 4200);
-}
-function compress(file, w = 900, q = .6){
+const safe = fn => async (...a) => { try { return await fn(...a) } catch (e) { console.error(e); toast(e.code === "PERMISSION_DENIED" || /permission/i.test(e.message) ? "مفيش صلاحية للعملية دي" : "حصل خطأ، حاول تاني", false) } };
+function compress(file, w = 800, q = .7) {
   return new Promise(res => { const r = new FileReader();
     r.onload = () => { const i = new Image(); i.onload = () => { const k = Math.min(1, w / i.width), c = document.createElement("canvas");
       c.width = i.width * k; c.height = i.height * k; c.getContext("2d").drawImage(i, 0, 0, c.width, c.height); res(c.toDataURL("image/jpeg", q)) }; i.src = r.result };
     r.readAsDataURL(file) });
 }
-const EMAILJS = { service: "service_6boa519", publicKey: "_YXlKwxDWLdxG-_DB", approval: "template_g9kjv6u", welcome: "template_898wgo5" };
-async function sendMail(template, params){
-  try{ const r = await fetch("https://api.emailjs.com/api/v1.0/email/send", {method:"POST", headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({service_id:EMAILJS.service, template_id:template, user_id:EMAILJS.publicKey, template_params:params})}); return r.ok }catch{ return false }
+async function sendMail(template, params) {
+  try { const r = await fetch("https://api.emailjs.com/api/v1.0/email/send", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ service_id: EMAILJS.service, template_id: template, user_id: EMAILJS.publicKey, template_params: params }) }); return r.ok } catch { return false }
+}
+function embed(url) {
+  let m = url.match(/drive\.google\.com\/file\/d\/([^/?]+)/); if (m) return `https://drive.google.com/file/d/${m[1]}/preview`;
+  m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); if (m) return `https://www.youtube-nocookie.com/embed/${m[1]}?rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1`;
+  return url;
+}
+const isFile = u => /\.(mp4|webm|ogg|mov)(\?|$)/i.test(u);
+
+/* ============ الحالة ============ */
+let U = null, P = null, holding = false, paint = null, pt = 0;
+const D = { teachers: {}, courses: {}, enr: {}, myReqs: {}, reqs: {}, views: {} };
+let unsubs = [], pageUnsubs = [], guardOff = null, onModalClose = null;
+const coursesOf = t => arr(D.courses).filter(c => c.teacherId === t).sort((a, b) => (a.position || 0) - (b.position || 0));
+const tname = id => D.teachers[id]?.name || "مدرس";
+const listen = (path, key) => unsubs.push(onValue(ref(db, path), s => { D[key] = s.val() || {}; paintSoon() }, () => {}));
+const paintSoon = () => { clearTimeout(pt); pt = setTimeout(() => paint && paint(true), 60) };
+
+/* ============ نافذة منبثقة ============ */
+const dlg = $("dlg");
+function modal(html, cls = "") { dlg.className = cls; $("mb").innerHTML = html; onModalClose = null; if (!dlg.open) dlg.showModal() }
+dlg.addEventListener("click", e => { if (e.target === dlg || e.target.closest("[data-close]")) dlg.close() });
+dlg.addEventListener("close", () => { const cb = onModalClose; onModalClose = null; if (guardOff) { guardOff(); guardOff = null } $("mb").innerHTML = ""; cb && cb() });
+const head = t => `<div class="mh"><h3>${esc(t)}</h3><button class="x" data-close aria-label="إغلاق">${ic("x")}</button></div>`;
+
+function ask(title, fields, ok = "حفظ", desc = "") {
+  return new Promise(res => {
+    modal(`${head(title)}${desc ? `<p class="mut" style="margin-bottom:14px">${esc(desc)}</p>` : ""}<form id="af" novalidate>${fields.map(f => `<div class="fld"><label for="f-${f.k}">${esc(f.label)}</label>${
+      f.type === "textarea" ? `<textarea id="f-${f.k}" rows="3">${esc(f.value || "")}</textarea>`
+      : f.type === "file" ? `<input id="f-${f.k}" type="file" accept="image/*">`
+      : `<input id="f-${f.k}" type="${f.type || "text"}" value="${esc(f.value ?? "")}" placeholder="${esc(f.ph || "")}" ${f.ltr ? 'dir="ltr"' : ""} ${f.min != null ? `min="${f.min}"` : ""}>`}</div>`).join("")}
+      <p class="err" id="ae"></p><div class="row end"><button type="button" class="btn ghost" data-close>إلغاء</button><button class="btn">${esc(ok)}</button></div></form>`);
+    onModalClose = () => res(null);
+    $("af").onsubmit = async e => { e.preventDefault(); const v = {};
+      for (const f of fields) { const el = $("f-" + f.k);
+        v[f.k] = f.type === "file" ? (el.files[0] ? await compress(el.files[0], f.w || 700) : undefined) : el.value.trim();
+        if (f.req && f.type !== "file" && !v[f.k]) { $("ae").textContent = `اكتب ${f.label}`; return } }
+      onModalClose = null; dlg.close(); res(v) };
+    setTimeout(() => $("af")?.querySelector("input,textarea")?.focus(), 80);
+  });
+}
+function sure(msg, ok = "تأكيد") {
+  return new Promise(res => {
+    modal(`${head("تأكيد")}<p style="margin-bottom:18px">${esc(msg)}</p><div class="row end"><button class="btn ghost" data-close>إلغاء</button><button class="btn danger" id="yes">${esc(ok)}</button></div>`);
+    onModalClose = () => res(false); $("yes").onclick = () => { onModalClose = null; dlg.close(); res(true) };
+  });
 }
 
-let U, SITE = {};
-const NAME = () => SITE.schoolName || "منصة المعلمة";
+/* ============ الكشف عند الظهور + العدّاد ============ */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target) } }), { threshold: .08 });
+function reveal(instant) { document.querySelectorAll(".rv:not(.in)").forEach(el => instant ? el.classList.add("in") : io.observe(el)) }
+function countUp(el) { const to = +el.dataset.n || 0, t0 = performance.now(); const f = t => { const k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f) }; requestAnimationFrame(f) }
 
-function renderNav(){
-  document.title = NAME(); $("nav").className = "nav";
-  $("nav").innerHTML = `<a class="brand" href="#/">${esc(NAME())}</a><a class="l" href="#/">الكورسات</a><a class="l" href="#/account">حسابي</a>
-    <button class="btn ${U ? "ghost" : "pencil"}" id="authBtn">${U ? "خروج" : "دخول / حساب جديد"}</button>`;
-  $("authBtn").onclick = () => U ? signOut(auth) : openAuth();
+/* ============ هيكل الصفحة ============ */
+function footer() {
+  return `<footer class="foot"><div class="fw"><div><div class="brand"><span class="logo">${ic("cap")}</span>${esc(PLATFORM)}</div><p>منصة تعليمية بتجمع مدرسين متميزين، كل مدرس ليه صفحته وكورساته، وانت بتتعلم في أي وقت ومن أي مكان.</p></div>
+    <div><h4>المنصة</h4><a href="#/">الرئيسية</a><a href="#/account">حسابي</a></div>
+    <div><h4>للمدرسين</h4><a href="#/studio">لوحة التحكم</a><a href="#/studio/page">صفحتي</a></div>
+    <div><h4>الأمان</h4><li>الفيديوهات مربوطة بحسابك</li><li>علامة مائية باسمك أثناء المشاهدة</li></div></div>
+  <div class="cp"><span>© ${new Date().getFullYear()} ${esc(PLATFORM)}. جميع الحقوق محفوظة.</span><span>صُنع بحب للتعليم</span></div></footer>`;
 }
-
-// ---------- تسجيل الدخول / حساب جديد ----------
-let adlg;
-function openAuth(msg = ""){
-  if(!adlg){
-    adlg = document.createElement("dialog");
-    adlg.innerHTML = `<div class="tabs"><button class="btn" id="tL" aria-selected="true">دخول</button><button class="btn" id="tS" aria-selected="false">حساب جديد</button></div>
-    <div id="sf" class="hide"><label for="a-name">الاسم بالكامل</label><input id="a-name" autocomplete="name">
-      <label for="a-nid">الرقم القومي (14 رقم)</label><input id="a-nid" dir="ltr" inputmode="numeric" maxlength="14">
-      <label for="a-phone">رقم الموبايل</label><input id="a-phone" dir="ltr" inputmode="tel" autocomplete="tel"></div>
-    <label for="a-email">الإيميل</label><input id="a-email" type="email" dir="ltr" autocomplete="username">
-    <label for="a-pass">الباسوورد (6 حروف على الأقل)</label><input id="a-pass" type="password" autocomplete="current-password">
-    <p id="a-msg" style="color:var(--err);font-weight:600;min-height:1.3em;margin:0 0 10px"></p>
-    <div class="row"><button class="btn pencil" id="a-go">دخول</button><button class="btn ghost" id="a-fp">نسيت الباسوورد؟</button><button class="btn ghost" id="a-x">إلغاء</button></div>
-    <p class="mut" style="font-size:.85rem;margin:10px 0 0">بياناتك (الاسم والرقم القومي) بتتستخدم لتفعيل اشتراكك فقط ومش بتتعرض لحد غير المعلمة.</p>`;
-    document.body.append(adlg);
-    let signup = false; const m = () => $("a-msg"), bad = t => { m().style.color = "var(--err)"; m().textContent = t };
-    const set = s => { signup = s; $("sf").classList.toggle("hide", !s); $("a-go").textContent = s ? "إنشاء الحساب" : "دخول"; $("a-fp").classList.toggle("hide", s);
-      $("tL").setAttribute("aria-selected", !s); $("tS").setAttribute("aria-selected", s); m().textContent = "" };
-    $("tL").onclick = () => set(false); $("tS").onclick = () => set(true); $("a-x").onclick = () => adlg.close();
-    $("a-fp").onclick = async () => { const e = $("a-email").value.trim(); if(!e) return bad("اكتب إيميلك الأول وبعدين دوس نسيت الباسوورد");
-      try{ await sendPasswordResetEmail(auth, e); m().style.color = "var(--ok)"; m().textContent = "بعتنا لينك تغيير الباسوورد على إيميلك. راجع الـ Spam كمان." }catch{ bad("مقدرناش نبعت الرسالة. اتأكد من الإيميل") } };
-    $("a-go").onclick = async () => {
-      const email = $("a-email").value.trim(), pass = $("a-pass").value; m().textContent = "";
-      try{
-        if(!signup){ await signInWithEmailAndPassword(auth, email, pass); return }
-        const name = $("a-name").value.trim(), nid = $("a-nid").value.trim(), phone = $("a-phone").value.trim();
-        if(name.split(/\s+/).length < 2) return bad("اكتب اسمك الثنائي على الأقل");
-        if(!/^[23]\d{13}$/.test(nid)) return bad("الرقم القومي لازم يكون 14 رقم صحيح");
-        const cr = await createUserWithEmailAndPassword(auth, email, pass);
-        await setDoc(doc(db, "students", cr.user.uid), { name, nationalId: nid, phone, email, createdAt: serverTimestamp() });
-        sendMail(EMAILJS.welcome, { to_email: email, to_name: name });
-      }catch(e){ bad(({"auth/invalid-credential":"الإيميل أو الباسوورد غلط","auth/email-already-in-use":"الإيميل ده مسجل قبل كده، سجّل دخول","auth/weak-password":"الباسوورد ضعيف، استخدم 6 حروف على الأقل","auth/invalid-email":"الإيميل مش مكتوب صح"})[e.code] || "حصل خطأ، حاول تاني") }
-    };
-  }
-  $("a-msg").textContent = msg; adlg.showModal();
+function shell() {
+  const t = P.role === "teacher";
+  $("app").innerHTML = `<header class="nav"><div><a class="brand" href="#/"><span class="logo">${ic("cap")}</span>${esc(PLATFORM)}</a>
+    <nav class="links">${t ? `<a href="#/studio" data-m="studio">${ic("dash")}لوحة التحكم</a><a href="#/t/${U.uid}" data-m="t">${ic("user")}صفحتي</a>`
+      : `<a href="#/" data-m="home">${ic("home")}الرئيسية</a><a href="#/account" data-m="account">${ic("book")}كورساتي</a>`}</nav>
+    <div class="me"><span class="av" style="background:${grad(P.name)}">${D.teachers[U.uid]?.photo ? `<img src="${D.teachers[U.uid].photo}" alt="">` : esc(ini(P.name))}</span><div><b>${esc(first(P.name))}</b><small>${t ? "مدرس" : "طالب"}</small></div></div>
+    <button class="btn ghost sm" id="out">${ic("out")}خروج</button></div></header>
+    <main id="pg"></main>${footer()}`;
+  $("out").onclick = () => signOut(auth);
 }
+function markNav(k) { document.querySelectorAll(".nav .links a").forEach(a => a.classList.toggle("on", a.dataset.m === k)) }
+function pg(html) { const m = $("pg"); m.innerHTML = html; m.classList.remove("rise"); void m.offsetWidth; m.classList.add("rise") }
 
-// ---------- الراوتر ----------
-function route(){
-  const h = location.hash, m = h.match(/^#\/course\/(.+)$/); scrollTo(0, 0);
-  if(m) course(m[1]); else if(h === "#/account") account(); else home();
-}
-
-// ---------- الرئيسية ----------
-async function home(){
-  $("view").innerHTML = `<section class="hero"><div><h1>${esc(NAME())}</h1><p>${esc(SITE.tagline || "كورسات مسجّلة بشرح مبسّط، تشوفها في أي وقت ومن أي مكان.")}</p><button class="btn pencil" id="go">شوف الكورسات</button></div></section>
-  <main class="wrap up"><h2 id="courses" style="margin-top:0;color:var(--ink)">الكورسات</h2><div id="list" class="grid"><p class="empty">جاري التحميل…</p></div>
-    <h2>إزاي تشترك؟</h2><div class="grid">
-      <div class="card"><h3>1. اعمل حساب</h3><p class="mut">سجّل باسمك ورقمك القومي وإيميلك مرة واحدة.</p></div>
-      <div class="card"><h3>2. حوّل وارفع الصورة</h3><p class="mut">اختار الكورس، حوّل المبلغ على رقم المعلمة، وارفع صورة التحويل من نفس الصفحة.</p></div>
-      <div class="card"><h3>3. استنى الموافقة</h3><p class="mut">المعلمة بتراجع الطلب وتفعّل اشتراكك، وهتوصلك رسالة على الإيميل.</p></div></div></main>`;
-  $("go").onclick = () => $("courses").scrollIntoView({behavior:"smooth"});
-  try{
-    const s = await getDocs(query(collection(db,"courses"), orderBy("position")));
-    $("list").innerHTML = s.docs.map(d => { const c = d.data();
-      return `<a class="card course" href="#/course/${d.id}">${c.image ? `<img class="im" src="${c.image}" alt="">` : `<div class="im">${esc(c.title[0])}</div>`}
-        <div class="tx"><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p></div></a>` }).join("") || '<p class="empty">الكورسات هتظهر هنا أول ما المعلمة تضيفها.</p>';
-  }catch{ $("list").innerHTML = '<p class="empty">مقدرناش نحمّل الكورسات. جرّب تاني.</p>' }
-}
-
-// ---------- صفحة الكورس ----------
-async function course(id){
-  $("view").innerHTML = '<main class="wrap"><p class="empty">جاري التحميل…</p></main>';
-  const cs = await getDoc(doc(db,"courses",id)).catch(() => null);
-  if(!cs || !cs.exists()){ $("view").innerHTML = '<main class="wrap"><p class="empty">الكورس ده مش موجود. <a href="#/">ارجع للكورسات</a></p></main>'; return }
-  const c = cs.data(); document.title = c.title + " | " + NAME();
-  const ls = (await getDocs(query(collection(db,"lectures"), where("courseId","==",id)))).docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.position||0)-(b.position||0));
-  const enr = new Set();
-  if(U) (await getDocs(query(collection(db,"enrollments"), where("uid","==",U.uid)))).docs.forEach(d=>enr.add(d.id));
-  const hasAll = U && enr.has(U.uid+"_"+id), unlocked = l => !l.price || hasAll || (U && enr.has(U.uid+"_"+l.id));
-  const total = ls.reduce((s,l)=>s+(l.price||0),0), dlg = $("dlg");
-  $("view").innerHTML = `<main class="wrap" id="main"><a href="#/" class="mut">← كل الكورسات</a>
-    ${c.image ? `<img class="prev" style="width:100%;max-height:340px;object-fit:cover;margin-top:10px" src="${c.image}" alt="">` : ""}
-    <h1 style="margin:10px 0 6px">${esc(c.title)}</h1><p class="mut" style="line-height:1.8">${esc(c.description)}</p>
-    ${hasAll ? '<span class="chip ok">أنت مشترك في الكورس كله</span>' : total ? `<div class="row"><b>سعر الكورس كله: ${money(total)}</b><button class="btn pencil" id="subAll">اشترك في الكورس</button></div>` : ""}
-    <h2>الحصص</h2><div class="card">${ls.map(l=>`<div class="lec"><div><b>${esc(l.title)}</b> <span class="chip ${unlocked(l)?"ok":""}">${unlocked(l)?"متاحة":money(l.price)}</span><br><span class="mut">${esc(l.description)}</span></div>
-      <div class="row">${unlocked(l) ? `<button class="btn" data-w="${l.id}">شاهد</button>` : `<button class="btn pencil" data-s="${l.id}">اشترك في الحصة</button><button class="btn ghost" data-c="${l.id}">عندي كود</button>`}</div></div>`).join("") || '<p class="empty">لسه مفيش حصص في الكورس ده.</p>'}</div></main>`;
-
-  const need = () => { if(U) return true; openAuth("سجّل دخول الأول عشان تكمل."); return false }, byId = k => ls.find(l=>l.id===k);
-  const video = (l, url) => { $("db").innerHTML = `<h3 style="margin-top:0">${esc(l.title)}</h3><div class="video"><iframe src="${esc(embed(url))}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
-    setDoc(doc(db,"views",U.uid+"_"+l.id), {uid:U.uid, lectureId:l.id, courseId:id, count:increment(1), last:serverTimestamp()}, {merge:true}).catch(()=>{}) };
-
-  $("main").onclick = async e => {
-    const b = e.target.closest("button"); if(!b) return;
-    if(b.id === "subAll"){ if(need()) subscribe({type:"course", title:c.title, amount:total}) }
-    if(b.dataset.s){ const l = byId(b.dataset.s); if(need()) subscribe({type:"lecture", lectureId:l.id, title:l.title, amount:l.price}) }
-    if(b.dataset.w){ if(!need()) return; const l = byId(b.dataset.w); dlg.showModal(); $("db").textContent = "لحظة…";
-      try{ video(l, (await getDoc(doc(db,"videos",l.id))).data().videoUrl) }catch{ $("db").textContent = "مقدرناش نفتح الفيديو. لو اشتركت من شوية جرّب تحدّث الصفحة." } }
-    if(b.dataset.c){ if(!need()) return; const l = byId(b.dataset.c); dlg.showModal();
-      $("db").innerHTML = `<h3 style="margin-top:0">${esc(l.title)}</h3><label for="cd">كود الحصة</label><input id="cd" dir="ltr" maxlength="12" autocomplete="off"><p id="ce" style="color:var(--err);font-weight:600;margin:0 0 10px"></p><button class="btn pencil" id="cg">شاهد</button>`;
-      $("cg").onclick = async () => { const k = $("cd").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");
-        try{ const s = await getDoc(doc(db,"unlock",k)); if(s.exists() && s.data().lectureId===l.id) return video(l, s.data().videoUrl) }catch{}
-        $("ce").textContent = "الكود غلط أو اتغيّر. راجع المعلمة." } }
+/* ============ صفحة الدخول ============ */
+function authPage() {
+  let role = "student", mode = "login";
+  $("app").innerHTML = `<div class="auth"><section class="card auth-card rise"><div class="brand"><span class="logo">${ic("cap")}</span>${esc(PLATFORM)}</div>
+    <h1 id="ah">أهلاً بيك من تاني</h1><p class="sub" id="as">سجّل دخولك وكمّل من حيث وقفت.</p>
+    <div class="seg" id="sr" data-v="0"><span class="th"></span><button type="button" data-r="student" aria-pressed="true">${ic("user")}طالب</button><button type="button" data-r="teacher" aria-pressed="false">${ic("cap")}مدرس</button></div>
+    <form id="fm" novalidate>
+      <div class="fold off" id="fsu"><div>
+        <div class="fld"><label for="u-name">الاسم بالكامل</label><div class="ib">${ic("user")}<input id="u-name" autocomplete="name" placeholder="مثال: أحمد محمد علي"></div></div>
+        <div class="fld"><label for="u-phone">رقم الموبايل</label><div class="ib">${ic("phone")}<input id="u-phone" dir="ltr" inputmode="tel" autocomplete="tel" placeholder="01xxxxxxxxx"></div></div>
+        <div class="fold off" id="ftc"><div>
+          <div class="fld"><label for="u-title">التخصص / المادة</label><div class="ib">${ic("book")}<input id="u-title" placeholder="مثال: مدرس لغة عربية"></div></div>
+          <div class="fld"><label for="u-code">كود المدرسين</label><div class="ib">${ic("key")}<input id="u-code" dir="ltr" autocomplete="off" placeholder="الكود اللي إدارة المنصة بعتتهولك"></div></div>
+        </div></div>
+      </div></div>
+      <div class="fld"><label for="u-email">الإيميل</label><div class="ib">${ic("mail")}<input id="u-email" type="email" dir="ltr" autocomplete="username" placeholder="name@example.com"></div></div>
+      <div class="fld"><label for="u-pass">الباسوورد</label><div class="ib">${ic("lock")}<input id="u-pass" type="password" autocomplete="current-password" placeholder="6 حروف على الأقل"></div></div>
+      <p class="err" id="am"></p>
+      <button class="btn block" id="go" style="padding:14px">دخول</button>
+    </form>
+    <div class="row between" style="margin-top:16px;font-size:.9rem"><button class="link" id="fp" type="button">نسيت الباسوورد؟</button><span class="mut"><span id="sw">لسه معندكش حساب؟</span> <button class="link" id="tg" type="button">إنشاء حساب</button></span></div>
+  </section>
+  <aside class="show rise" style="animation-delay:.15s"><div><span class="eyebrow">${ic("spark")}تعليم بشكل مختلف</span><h2 style="margin-top:14px">تعلّم من أفضل المدرسين.. <em>في مكان واحد</em></h2></div>
+    <div class="mock"><div class="pl">${ic("play")}</div><div class="pb"></div></div>
+    <div class="fl a">${ic("users")}مدرسين بصفحات خاصة</div><div class="fl b">${ic("shield")}مشاهدة آمنة ومحمية</div><div class="fl c">${ic("video")}حصص مسجّلة في أي وقت</div>
+    <div class="dots"><span>${ic("check")}دفع بسيط</span><span>${ic("check")}موافقة سريعة</span><span>${ic("check")}تابع تقدمك</span></div></aside></div>${footer()}`;
+  const m = $("am"), bad = t => { m.className = "err"; m.textContent = t };
+  const sync = () => {
+    const su = mode === "signup", tc = role === "teacher";
+    $("sr").dataset.v = tc ? 1 : 0; $("sr").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.r === role));
+    $("fsu").classList.toggle("off", !su); $("ftc").classList.toggle("off", !(su && tc));
+    $("ah").textContent = su ? (tc ? "انضم كمدرس" : "ابدأ رحلتك معانا") : "أهلاً بيك من تاني";
+    $("as").textContent = su ? (tc ? "اعمل صفحتك وانشر كورساتك بنفسك." : "اعمل حسابك وابدأ تتفرج على الكورسات.") : "سجّل دخولك وكمّل من حيث وقفت.";
+    $("go").textContent = su ? "إنشاء الحساب" : "دخول"; $("sw").textContent = su ? "عندك حساب؟" : "لسه معندكش حساب؟"; $("tg").textContent = su ? "تسجيل الدخول" : "إنشاء حساب";
+    $("fp").classList.toggle("hide", su); $("u-pass").autocomplete = su ? "new-password" : "current-password"; m.textContent = "";
   };
+  $("sr").onclick = e => { const b = e.target.closest("button"); if (b) { role = b.dataset.r; sync() } };
+  $("tg").onclick = () => { mode = mode === "login" ? "signup" : "login"; sync() };
+  $("fp").onclick = async () => { const e = $("u-email").value.trim(); if (!e) return bad("اكتب إيميلك الأول وبعدين دوس نسيت الباسوورد");
+    try { await sendPasswordResetEmail(auth, e); m.className = "err okm"; m.textContent = "بعتنا لينك تغيير الباسوورد على إيميلك. راجع الـ Spam كمان." } catch { bad("مقدرناش نبعت الرسالة، اتأكد من الإيميل") } };
+  $("fm").onsubmit = async ev => {
+    ev.preventDefault(); const email = $("u-email").value.trim(), pass = $("u-pass").value; m.textContent = "";
+    if (!email || !pass) return bad("اكتب الإيميل والباسوورد");
+    const b = $("go"); b.disabled = true; b.classList.add("load"); holding = true;
+    try {
+      if (mode === "login") {
+        const cr = await signInWithEmailAndPassword(auth, email, pass);
+        const p = (await get(ref(db, "users/" + cr.user.uid))).val();
+        if (p && p.role !== role) { await signOut(auth); holding = false; return bad(`الحساب ده مسجّل كـ${p.role === "teacher" ? "مدرس" : "طالب"}، غيّر الاختيار من فوق.`) }
+        holding = false; await enter(cr.user);
+      } else {
+        const name = $("u-name").value.trim(), phone = $("u-phone").value.trim(), title = $("u-title").value.trim(), code = $("u-code").value.trim();
+        if (name.split(/\s+/).length < 2) { holding = false; return bad("اكتب اسمك الثنائي على الأقل") }
+        if (!/^01\d{9}$/.test(phone)) { holding = false; return bad("رقم الموبايل لازم يكون 11 رقم ويبدأ بـ 01") }
+        if (role === "teacher" && !code) { holding = false; return bad("اكتب كود المدرسين") }
+        const cr = await createUserWithEmailAndPassword(auth, email, pass);
+        const prof = { role, name, email: cr.user.email, phone, createdAt: Date.now() };
+        if (role === "teacher") { prof.title = title; prof.code = code }
+        try { await set(ref(db, "users/" + cr.user.uid), prof) }
+        catch { await cr.user.delete().catch(() => {}); holding = false; return bad(role === "teacher" ? "كود المدرسين غلط" : "مقدرناش نكمّل التسجيل، جرّب تاني") }
+        if (role === "teacher") await set(ref(db, "teachers/" + cr.user.uid), { name, title: title || "", bio: "" });
+        sendMail(EMAILJS.welcome, { to_email: email, to_name: name });
+        holding = false; await enter(cr.user);
+      }
+    } catch (e) {
+      holding = false;
+      bad(({ "auth/invalid-credential": "الإيميل أو الباسوورد غلط", "auth/email-already-in-use": "الإيميل ده مسجل قبل كده، سجّل دخول", "auth/weak-password": "الباسوورد ضعيف، استخدم 6 حروف على الأقل", "auth/invalid-email": "الإيميل مش مكتوب صح", "auth/too-many-requests": "محاولات كتير، استنى شوية وجرّب تاني", "auth/network-request-failed": "مشكلة في النت، جرّب تاني" })[e.code] || "حصل خطأ، حاول تاني");
+    } finally { b.disabled = false; b.classList.remove("load") }
+  };
+  sync();
+}
 
-  async function subscribe(it){
-    let pay = {methods:[], instructions:""}; try{ const s = await getDoc(doc(db,"settings","payment")); if(s.exists()) pay = s.data() }catch{}
-    const ms = (pay.methods||[]).filter(m=>m.number);
-    $("db").innerHTML = `<h3 style="margin-top:0">اشتراك: ${esc(it.title)}</h3><p>المبلغ المطلوب: <b>${money(it.amount)}</b></p>
-      <p class="mut" style="line-height:1.8">${esc(pay.instructions || "حوّل المبلغ على أحد الأرقام التالية، وبعدها صوّر شاشة التحويل بوضوح بحيث يظهر المبلغ ورقم العملية، وارفعها هنا. هنراجع طلبك ونفعّل اشتراكك في أقرب وقت.")}</p>
-      ${ms.map(m=>`<div class="pm"><div>${esc(m.name)}<br><span class="num">${esc(m.number)}</span></div><button class="btn ghost" data-cp="${esc(m.number)}">نسخ الرقم</button></div>`).join("") || '<p class="empty">المعلمة لسه ماضافتش طرق دفع. كلّمها مباشرة.</p>'}
-      <label for="shot" style="margin-top:12px">صورة التحويل</label><input id="shot" type="file" accept="image/*"><img id="pv" class="prev hide" alt="">
-      <button class="btn pencil" id="send" disabled>إرسال الطلب</button>`;
-    dlg.showModal(); let img = null;
-    $("db").onclick = e => { const b = e.target.closest("[data-cp]"); if(b){ navigator.clipboard.writeText(b.dataset.cp); toast("تم نسخ الرقم") } };
-    $("shot").onchange = async e => { if(!e.target.files[0]) return; img = await compress(e.target.files[0]); $("pv").src = img; $("pv").classList.remove("hide"); $("send").disabled = false };
-    $("send").onclick = async () => { $("send").disabled = true;
-      try{ await addDoc(collection(db,"requests"), {uid:U.uid, type:it.type, courseId:id, lectureId:it.lectureId||null, title:it.title, amount:it.amount, screenshot:img, status:"pending", createdAt:serverTimestamp()});
-        dlg.close(); toast("وصل طلبك. هتوصلك رسالة على الإيميل أول ما المعلمة توافق.") }
-      catch{ toast("مقدرناش نبعت الطلب، جرّب تاني", false); $("send").disabled = false } };
+/* ============ الدخول للتطبيق ============ */
+async function enter(u) {
+  U = u; P = (await get(ref(db, "users/" + u.uid))).val();
+  if (!P) { P = { role: "student", name: (u.email || "طالب").split("@")[0] + " طالب", email: u.email || "", createdAt: Date.now() }; await set(ref(db, "users/" + u.uid), P) }
+  const [t, c] = await Promise.all([get(ref(db, "teachers")), get(ref(db, "courses"))]);
+  D.teachers = t.val() || {}; D.courses = c.val() || {};
+  if (P.role === "teacher" && !D.teachers[u.uid]) { const tp = { name: P.name, title: P.title || "", bio: "" }; await set(ref(db, "teachers/" + u.uid), tp); D.teachers[u.uid] = tp }
+  listen("teachers", "teachers"); listen("courses", "courses");
+  if (P.role === "student") { listen("enrollments/" + u.uid, "enr"); listen("studentRequests/" + u.uid, "myReqs") }
+  else { listen("requests/" + u.uid, "reqs"); listen("views/" + u.uid, "views") }
+  shell(); route();
+}
+function leave() { unsubs.forEach(f => f()); unsubs = []; cleanup(); U = P = null; Object.assign(D, { teachers: {}, courses: {}, enr: {}, myReqs: {}, reqs: {}, views: {} }); dlg.open && dlg.close(); history.replaceState(null, "", location.pathname); authPage() }
+function cleanup() { pageUnsubs.forEach(f => f()); pageUnsubs = []; paint = null }
+
+/* ============ الراوتر ============ */
+function route() {
+  if (!U || !P) return; cleanup(); if (dlg.open && !guardOff) dlg.close();
+  const h = location.hash || "#/", t = P.role === "teacher"; let m;
+  if (m = h.match(/^#\/course\/(.+)$/)) { pageCourse(m[1]); markNav(t ? "" : "home") }
+  else if (m = h.match(/^#\/t\/(.+)$/)) { pageTeacher(m[1]); markNav(m[1] === U.uid ? "t" : (t ? "" : "home")) }
+  else if (m = h.match(/^#\/studio(?:\/(\w+))?$/)) { if (!t) return go("#/"); pageStudio(m[1] || "req"); markNav("studio") }
+  else if (h === "#/account") { if (t) return go("#/studio/page"); pageAccount(); markNav("account") }
+  else { if (t) return go("#/studio"); pageHome(); markNav("home") }
+  scrollTo(0, 0);
+}
+addEventListener("hashchange", route);
+
+/* ============ بطاقات ============ */
+const courseCard = (c, i = 0) => { const tn = tname(c.teacherId);
+  return `<a class="card cc rv" style="--d:${Math.min(i, 8) * 70}ms" href="#/course/${c.id}"><div class="cv" style="background:${grad(c.title)}">${c.image ? `<img src="${c.image}" alt="" loading="lazy">` : esc(ini(c.title))}<span class="pill">${ic("play")}</span></div>
+  <div class="cb"><h3>${esc(c.title)}</h3><p>${esc(c.description) || "—"}</p><div class="cm"><span class="av sm" style="background:${grad(tn)}">${esc(ini(tn))}</span>${esc(tn)}</div></div></a>` };
+const teacherCard = (t, i = 0) => `<a class="card tc rv" style="--d:${Math.min(i, 8) * 70}ms" href="#/t/${t.id}"><span class="av lg" style="background:${grad(t.name)}">${t.photo ? `<img src="${t.photo}" alt="">` : esc(ini(t.name))}</span>
+  <h3>${esc(t.name)}</h3><p>${esc(t.title || "مدرّس")}</p><span class="chip pr">${coursesOf(t.id).length} كورس</span></a>`;
+const emptyBox = (i, t) => `<div class="empty">${ic(i)}<div>${esc(t)}</div></div>`;
+
+/* ============ الرئيسية (طالب) ============ */
+function pageHome() {
+  pg(`<section class="hero"><div><span class="eyebrow">${ic("spark")}أهلاً ${esc(first(P.name))}</span><h1>اختار مدرسك.. <em>وابدأ تتعلّم</em></h1>
+    <p>كل مدرس ليه صفحته وكورساته. اتفرج على الحصص في أي وقت، واشترك بخطوات بسيطة.</p>
+    <div class="srch">${ic("search")}<input id="sq" placeholder="دوّر على كورس أو مدرس..." autocomplete="off"></div></div>
+    <div class="hstats"><div><b data-n="0" id="n1">0</b><span class="mut">كورس</span></div><div><b data-n="0" id="n2">0</b><span class="mut">مدرس</span></div><div><b>24/7</b><span class="mut">متاح دايماً</span></div></div></section>
+    <section class="sec"><div class="sh"><h2>المدرسين</h2></div><div class="tscroll" id="tl"></div></section>
+    <section class="sec"><div class="sh"><h2>الكورسات</h2><span class="mut" id="rc"></span></div><div class="grid" id="cl"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div></section>`);
+  let counted = false;
+  paint = again => {
+    const f = $("sq").value.trim().toLowerCase(), ts = arr(D.teachers), cs = arr(D.courses).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const fc = cs.filter(c => !f || (c.title + " " + c.description + " " + tname(c.teacherId)).toLowerCase().includes(f)), ft = ts.filter(t => !f || (t.name + " " + (t.title || "")).toLowerCase().includes(f));
+    $("tl").innerHTML = ft.map(teacherCard).join("") || emptyBox("users", "مفيش مدرسين لسه.");
+    $("cl").innerHTML = fc.map(courseCard).join("") || emptyBox("book", f ? "مفيش نتايج للبحث ده." : "الكورسات هتظهر هنا أول ما المدرسين يضيفوها.");
+    $("rc").textContent = fc.length ? `${fc.length} كورس` : "";
+    $("n1").dataset.n = cs.length; $("n2").dataset.n = ts.length;
+    if (!counted) { counted = true; countUp($("n1")); countUp($("n2")) } else { $("n1").textContent = cs.length; $("n2").textContent = ts.length }
+    reveal(again);
+  };
+  $("sq").oninput = () => paint(true); paint();
+}
+
+/* ============ صفحة المدرس ============ */
+function pageTeacher(tid) {
+  paint = again => {
+    const t = D.teachers[tid]; if (!t) return pg(`<a class="back" href="#/">${ic("arrow", "flip")}رجوع</a>${emptyBox("user", "المدرس ده مش موجود.")}`);
+    const own = tid === U.uid, cs = coursesOf(tid);
+    pg(`<a class="back" href="${P.role === "teacher" ? "#/studio" : "#/"}">${ic("arrow", "flip")}رجوع</a>
+      <section class="card pad" style="display:flex;gap:24px;align-items:center;flex-wrap:wrap"><span class="av xl" style="background:${grad(t.name)}">${t.photo ? `<img src="${t.photo}" alt="">` : esc(ini(t.name))}</span>
+      <div style="flex:1;min-width:240px"><h1 style="font-size:1.8rem">${esc(t.name)}</h1><p class="mut">${esc(t.title || "مدرّس")}</p>${t.bio ? `<p style="margin-top:10px;max-width:42rem">${esc(t.bio)}</p>` : ""}
+        <div class="row" style="margin-top:14px"><span class="chip pr">${ic("book")}${cs.length} كورس</span>${own ? `<a class="btn soft sm" href="#/studio/page">${ic("edit")}تعديل صفحتي</a><button class="btn sm" id="nc">${ic("plus")}كورس جديد</button>` : ""}</div></div></section>
+      <section class="sec"><div class="sh"><h2>كورسات ${esc(first(t.name))}</h2></div><div class="grid">${cs.map(courseCard).join("") || emptyBox("book", own ? "لسه مضفتش كورسات. دوس على كورس جديد." : "مفيش كورسات لسه.")}</div></section>`);
+    if (own) $("nc").onclick = addCourse; reveal(true);
+  };
+  paint();
+}
+const addCourse = safe(async () => {
+  const v = await ask("كورس جديد", [{ k: "title", label: "اسم الكورس", req: 1 }, { k: "description", label: "وصف الكورس", type: "textarea" }, { k: "image", label: "صورة الغلاف (اختياري)", type: "file", w: 900 }], "إضافة الكورس"); if (!v) return;
+  const id = push(ref(db, "courses")).key;
+  await set(ref(db, "courses/" + id), { teacherId: U.uid, title: v.title, description: v.description || "", image: v.image || null, position: coursesOf(U.uid).length, createdAt: Date.now() });
+  toast("تمت إضافة الكورس، ضيف الحصص دلوقتي"); go("#/course/" + id);
+});
+
+/* ============ صفحة الكورس ============ */
+function pageCourse(cid) {
+  let L = {}, loaded = false;
+  pageUnsubs.push(onValue(ref(db, "lectures/" + cid), s => { L = s.val() || {}; loaded = true; paint && paint(true) }, () => { loaded = true; paint && paint(true) }));
+  let first_ = true;
+  paint = again => {
+    const c = D.courses[cid];
+    if (!c) return pg(`<a class="back" href="#/">${ic("arrow", "flip")}رجوع</a>${emptyBox("book", "الكورس ده مش موجود أو اتحذف.")}`);
+    const own = c.teacherId === U.uid, ls = arr(L).sort((a, b) => (a.position || 0) - (b.position || 0) || (a.createdAt || 0) - (b.createdAt || 0));
+    const hasAll = !!D.enr[cid], open = l => own || !l.price || hasAll || !!D.enr[l.id], total = ls.reduce((s, l) => s + (l.price || 0), 0);
+    document.title = c.title + " | " + PLATFORM;
+    const tn = tname(c.teacherId), anim = first_ && !again; first_ = false;
+    pg(`<a class="back" href="${own ? "#/studio/courses" : "#/"}">${ic("arrow", "flip")}رجوع</a>
+      <div class="cover" style="background:${grad(c.title)}">${c.image ? `<img src="${c.image}" alt="">` : esc(ini(c.title))}</div>
+      <section class="card cinfo" id="cp"><h1>${esc(c.title)}</h1>
+        <a class="row" href="#/t/${c.teacherId}" style="gap:8px;font-weight:600"><span class="av sm" style="background:${grad(tn)}">${esc(ini(tn))}</span>${esc(tn)}</a>
+        <p>${esc(c.description)}</p>
+        <div class="row"><span class="chip pr">${ic("video")}${ls.length} حصة</span>
+          ${own ? `<span class="chip ok">${ic("edit")}وضع المحرر</span>` : hasAll ? `<span class="chip ok">${ic("check")}مشترك في الكورس كله</span>` : total ? `<b>الكورس كله: ${money(total)}</b><button class="btn" data-a="subAll">${ic("wallet")}اشترك في الكورس</button>` : ""}
+          ${own ? `<button class="btn soft sm" data-a="editC">${ic("edit")}تعديل الكورس</button><button class="btn danger sm" data-a="delC">${ic("trash")}حذف</button><button class="btn sm" data-a="addL">${ic("plus")}إضافة حصة</button>` : ""}</div></section>
+      <section class="sec"><div class="sh"><h2>الحصص</h2></div><div class="card" style="overflow:hidden">${!loaded ? '<div class="sk" style="height:120px;border-radius:0"></div>' : ls.map((l, i) => { const ok = open(l);
+        return `<div class="lec ${ok ? "" : "lk"}"><span class="n">${ok ? i + 1 : ic("lock")}</span><div class="li"><b>${esc(l.title)}</b>${l.description ? `<small>${esc(l.description)}</small>` : ""}</div>
+          <span class="chip ${ok ? "ok" : ""}">${ok ? (l.price ? "متاحة" : "مجانية") : money(l.price)}</span>
+          <div class="row">${ok ? `<button class="btn sm" data-a="watch" data-id="${l.id}">${ic("play")}شاهد</button>` : `<button class="btn sm" data-a="sub" data-id="${l.id}">${ic("wallet")}اشترك</button><button class="btn ghost sm" data-a="code" data-id="${l.id}">${ic("key")}عندي كود</button>`}
+          ${own ? `<button class="btn ghost ico" title="نسخ كود الحصة" data-a="cpCode" data-id="${l.id}">${ic("key")}</button><button class="btn ghost ico" title="تعديل" data-a="editL" data-id="${l.id}">${ic("edit")}</button><button class="btn danger ico" title="حذف" data-a="delL" data-id="${l.id}">${ic("trash")}</button>` : ""}</div></div>` }).join("") || `<div class="empty" style="border:0">${ic("video")}<div>${own ? "ضيف أول حصة في الكورس." : "لسه مفيش حصص في الكورس ده."}</div></div>`}</div></section>`);
+    if (anim) { const k = document.querySelector(".cinfo"); k.classList.add("rise") }
+    $("pg").onclick = e => { const b = e.target.closest("[data-a]"); if (b) act(b.dataset.a, b.dataset.id) };
+  };
+  const byId = id => ({ id, ...(L[id] || {}) });
+  const act = safe(async (a, id) => {
+    const c = D.courses[cid]; if (!c) return;
+    if (a === "subAll") return subscribe(c, { type: "course", title: c.title, amount: arr(L).reduce((s, l) => s + (l.price || 0), 0) });
+    if (a === "sub") { const l = byId(id); return subscribe(c, { type: "lecture", lectureId: id, title: `${c.title} — ${l.title}`, amount: l.price }) }
+    if (a === "watch") { const l = byId(id); modal(`${head(l.title)}<p class="mut">لحظة…</p>`);
+      try { const v = (await get(ref(db, `videos/${cid}/${id}`))).val(); if (!v) throw 0; player(c, l, v.url) } catch { modal(`${head("تعذّر فتح الفيديو")}<p class="mut">لو اشتركت من شوية جرّب تحدّث الصفحة.</p>`) } return }
+    if (a === "code") { const l = byId(id);
+      modal(`${head(l.title)}<form id="cf"><div class="fld"><label for="cd">كود الحصة</label><div class="ib">${ic("key")}<input id="cd" dir="ltr" maxlength="12" autocomplete="off" placeholder="XXXXXXXX"></div></div><p class="err" id="ce"></p><button class="btn block">${ic("play")}شاهد</button></form>`);
+      $("cf").onsubmit = async e => { e.preventDefault(); const k = $("cd").value.trim().toUpperCase().replace(/[^A-Z0-9]/g, "");
+        try { const s = (await get(ref(db, "unlock/" + k))).val(); if (s && s.lectureId === id) return player(c, l, s.url) } catch {}
+        $("ce").textContent = "الكود غلط أو اتغيّر. راجع المدرس." }; return }
+    if (c.teacherId !== U.uid) return;
+    if (a === "cpCode") { const v = (await get(ref(db, `videos/${cid}/${id}`))).val() || {};
+      if (v.code) { await navigator.clipboard.writeText(v.code); toast("تم نسخ الكود: " + v.code) } else toast("الحصة دي مفيهاش كود", false) }
+    if (a === "editC") { const v = await ask("تعديل الكورس", [{ k: "title", label: "اسم الكورس", value: c.title, req: 1 }, { k: "description", label: "الوصف", type: "textarea", value: c.description }, { k: "image", label: "صورة جديدة (اختياري)", type: "file", w: 900 }]); if (!v) return;
+      const u = { [`courses/${cid}/title`]: v.title, [`courses/${cid}/description`]: v.description || "" }; if (v.image) u[`courses/${cid}/image`] = v.image; await update(ref(db), u); toast("تم التعديل") }
+    if (a === "delC") { if (!await sure("هيتحذف الكورس وكل حصصه نهائياً. تكمّل؟", "حذف نهائي")) return;
+      const vs = (await get(ref(db, "videos/" + cid))).val() || {}, u = { ["courses/" + cid]: null, ["lectures/" + cid]: null, ["videos/" + cid]: null };
+      Object.values(vs).forEach(v => { if (v.code) u["unlock/" + v.code] = null }); await update(ref(db), u); toast("تم حذف الكورس"); go("#/studio/courses") }
+    if (a === "addL") { const v = await ask("حصة جديدة", [{ k: "title", label: "عنوان الحصة", req: 1 }, { k: "description", label: "وصف قصير (اختياري)" }, { k: "price", label: "السعر بالجنيه (0 = مجانية)", type: "number", value: 0, min: 0 }, { k: "url", label: "لينك الفيديو (يوتيوب غير مدرج / درايف / mp4)", ltr: 1, ph: "https://", req: 1 }], "إضافة الحصة"); if (!v) return;
+      const lid = push(ref(db, "lectures/" + cid)).key, code = genCode(), pr = Math.max(0, +v.price || 0);
+      await update(ref(db), { [`lectures/${cid}/${lid}`]: { title: v.title, description: v.description || "", price: pr, position: Object.keys(L).length, createdAt: Date.now() },
+        [`videos/${cid}/${lid}`]: { url: v.url, free: pr === 0, code }, ["unlock/" + code]: { courseId: cid, lectureId: lid, url: v.url } }); toast("تمت إضافة الحصة") }
+    if (a === "editL") { const l = byId(id), vd = (await get(ref(db, `videos/${cid}/${id}`))).val() || {};
+      const v = await ask("تعديل الحصة", [{ k: "title", label: "عنوان الحصة", value: l.title, req: 1 }, { k: "description", label: "وصف قصير", value: l.description }, { k: "price", label: "السعر (0 = مجانية)", type: "number", value: l.price || 0, min: 0 }, { k: "url", label: "لينك الفيديو", ltr: 1, value: vd.url || "", req: 1 }]); if (!v) return;
+      const pr = Math.max(0, +v.price || 0), u = { [`lectures/${cid}/${id}/title`]: v.title, [`lectures/${cid}/${id}/description`]: v.description || "", [`lectures/${cid}/${id}/price`]: pr, [`videos/${cid}/${id}/url`]: v.url, [`videos/${cid}/${id}/free`]: pr === 0 };
+      if (vd.code) u[`unlock/${vd.code}/url`] = v.url; await update(ref(db), u); toast("تم التعديل") }
+    if (a === "delL") { if (!await sure("حذف الحصة نهائياً؟", "حذف")) return; const vd = (await get(ref(db, `videos/${cid}/${id}`))).val() || {};
+      const u = { [`lectures/${cid}/${id}`]: null, [`videos/${cid}/${id}`]: null }; if (vd.code) u["unlock/" + vd.code] = null; await update(ref(db), u); toast("تم الحذف") }
+  });
+  paint();
+}
+
+/* ============ المشغّل المحمي ============ */
+function player(c, l, url) {
+  const file = isFile(url);
+  modal(`<div class="mh"><div><h3>${esc(l.title)}</h3><small style="color:#94a3b8">${esc(c.title)}</small></div><div class="row"><button class="x" id="fs" title="ملء الشاشة">${ic("full")}</button><button class="x" data-close aria-label="إغلاق">${ic("x")}</button></div></div>
+    <div class="vbox" id="vb">${file ? `<video src="${esc(url)}" controls controlsList="nodownload noplaybackrate" disablepictureinpicture disableremoteplayback playsinline></video>` : `<iframe src="${esc(embed(url))}" allow="autoplay; encrypted-media" referrerpolicy="no-referrer"></iframe>`}
+      <div class="vtop"></div><div class="wm" id="wm"></div><div class="vmask">${ic("shield")}<b>الفيديو متوقف</b><span>ارجع للصفحة عشان تكمل المشاهدة</span></div></div>
+    <div class="vnote">${ic("shield")}المحتوى مرتبط بحسابك (${esc(P.name)}) وعليه علامة مائية. أي تسريب بيتتبع لحسابك.</div>`, "wide");
+  const vb = $("vb"), wm = $("wm"), vid = vb.querySelector("video");
+  const txt = `${P.name} • ${U.email}`, mv = () => { wm.textContent = txt; wm.style.top = (6 + Math.random() * 80) + "%"; wm.style.insetInlineStart = (3 + Math.random() * 55) + "%" };
+  mv(); const t1 = setInterval(mv, 4500);
+  const hide = () => { vb.classList.add("cover"); vid && vid.pause() }, show = () => vb.classList.remove("cover");
+  const t2 = setInterval(() => document.hasFocus() && !document.hidden ? show() : hide(), 350);
+  const key = e => { const k = (e.key || "").toLowerCase(), cs = e.ctrlKey || e.metaKey;
+    if (k === "printscreen" || k === "f12" || (cs && ["p", "s", "u"].includes(k)) || (cs && e.shiftKey && ["i", "j", "c", "s", "3", "4", "5"].includes(k))) { e.preventDefault(); navigator.clipboard?.writeText(" ").catch(() => {}); hide(); setTimeout(show, 2200) } };
+  const stop = e => e.preventDefault();
+  addEventListener("keydown", key, true); addEventListener("keyup", key, true); vb.addEventListener("contextmenu", stop); vb.addEventListener("dragstart", stop);
+  $("fs").onclick = () => vb.requestFullscreen?.().catch(() => {});
+  guardOff = () => { clearInterval(t1); clearInterval(t2); removeEventListener("keydown", key, true); removeEventListener("keyup", key, true); document.fullscreenElement && document.exitFullscreen().catch(() => {}) };
+  update(ref(db, `views/${c.teacherId}/${U.uid}_${l.id}`), { uid: U.uid, teacherId: c.teacherId, courseId: c.id || "", lectureId: l.id, name: P.name, lt: l.title, ct: c.title, count: increment(1), last: serverTimestamp() }).catch(() => {});
+}
+
+/* ============ الاشتراك ============ */
+async function subscribe(c, it) {
+  const pay = D.teachers[c.teacherId]?.pay || {}, ms = Object.values(pay.methods || {}).filter(m => m && m.number);
+  modal(`${head("اشتراك: " + it.title)}<p style="margin-bottom:8px">المبلغ المطلوب: <b>${money(it.amount)}</b></p>
+    <p class="mut" style="line-height:1.9;margin-bottom:14px">${esc(pay.instructions || "حوّل المبلغ على أحد الأرقام التالية، وبعدها صوّر شاشة التحويل بوضوح بحيث يظهر المبلغ ورقم العملية، وارفعها هنا. المدرس هيراجع طلبك ويفعّل اشتراكك في أقرب وقت.")}</p>
+    ${ms.map(m => `<div class="pm"><div>${esc(m.name)}<br><span class="mono">${esc(m.number)}</span></div><button class="btn ghost sm" data-cp="${esc(m.number)}">${ic("copy")}نسخ</button></div>`).join("") || '<p class="empty">المدرس لسه مضافش طرق دفع. كلّمه مباشرة.</p>'}
+    <div class="fld" style="margin-top:14px"><label for="shot">صورة التحويل</label><input id="shot" type="file" accept="image/*"></div><img id="pv" class="hide" style="max-width:100%;max-height:220px;border-radius:12px;margin-bottom:12px" alt="">
+    <button class="btn block" id="send" disabled>إرسال الطلب</button>`);
+  let img = null;
+  $("mb").onclick = e => { const b = e.target.closest("[data-cp]"); if (b) { navigator.clipboard.writeText(b.dataset.cp); toast("تم نسخ الرقم") } };
+  $("shot").onchange = async e => { if (!e.target.files[0]) return; img = await compress(e.target.files[0], 900, .6); $("pv").src = img; $("pv").classList.remove("hide"); $("send").disabled = false };
+  $("send").onclick = async () => { $("send").disabled = true; $("send").classList.add("load");
+    try { const rid = push(ref(db, "requests/" + c.teacherId)).key, now = serverTimestamp();
+      await update(ref(db), {
+        [`requests/${c.teacherId}/${rid}`]: { uid: U.uid, teacherId: c.teacherId, type: it.type, courseId: c.id, lectureId: it.lectureId || null, title: it.title, amount: it.amount || 0, name: P.name, phone: P.phone || "", email: U.email, status: "pending", createdAt: now },
+        [`studentRequests/${U.uid}/${rid}`]: { teacherId: c.teacherId, title: it.title, amount: it.amount || 0, status: "pending", createdAt: now },
+        [`receipts/${rid}`]: { uid: U.uid, teacherId: c.teacherId, img } });
+      dlg.close(); toast("وصل طلبك، هتتفعّل الحصة تلقائي أول ما المدرس يوافق") }
+    catch { toast("مقدرناش نبعت الطلب، جرّب تاني", false); $("send").disabled = false; $("send").classList.remove("load") } };
+}
+
+/* ============ حساب الطالب ============ */
+function pageAccount() {
+  pg(`<section class="sec" style="margin-top:0"><div class="sh"><div><h1 style="font-size:1.7rem">أهلاً ${esc(first(P.name))}</h1><span class="mut">${esc(U.email)}</span></div></div></section>
+    <section class="sec"><div class="sh"><h2>كورساتي</h2></div><div class="grid" id="ml"></div></section>
+    <section class="sec"><div class="sh"><h2>طلبات الاشتراك</h2></div><div class="card" id="rl" style="overflow:hidden"></div></section>
+    <section class="sec"><button class="btn ghost" id="rp">${ic("mail")}ابعتلي لينك تغيير الباسوورد</button></section>`);
+  const lab = { pending: ["wait", "قيد المراجعة"], approved: ["ok", "تمت الموافقة"], rejected: ["no", "مرفوض"] };
+  paint = again => {
+    const ids = [...new Set(arr(D.enr).map(e => e.courseId))].map(id => D.courses[id] && { id, ...D.courses[id] }).filter(Boolean);
+    $("ml").innerHTML = ids.map(courseCard).join("") || emptyBox("book", "لسه مفيش اشتراكات مفعّلة. اتصفح الكورسات وابدأ.");
+    $("rl").innerHTML = arr(D.myReqs).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)).map(r => `<div class="lec"><div class="li"><b>${esc(r.title)}</b><small>${money(r.amount)} — ${day(r.createdAt)}${r.reason ? " — السبب: " + esc(r.reason) : ""}</small></div><span class="chip ${lab[r.status][0]}">${lab[r.status][1]}</span></div>`).join("") || `<div class="empty" style="border:0">${ic("wallet")}<div>مفيش طلبات لسه.</div></div>`;
+    reveal(true);
+  };
+  $("rp").onclick = safe(async () => { await sendPasswordResetEmail(auth, U.email); toast("بعتنا اللينك على إيميلك") });
+  paint();
+}
+
+/* ============ لوحة المدرس ============ */
+function pageStudio(tab) {
+  const tabs = [["req", "الطلبات", "bell"], ["courses", "كورساتي", "book"], ["students", "الطلاب", "users"], ["page", "صفحتي", "user"]];
+  pg(`<section class="sec" style="margin-top:0"><div class="sh"><div><h1 style="font-size:1.7rem">لوحة التحكم</h1><span class="mut">أهلاً ${esc(first(P.name))}، كل حاجة بتتحدّث لحظياً.</span></div><a class="btn ghost sm" href="#/t/${U.uid}">${ic("eye")}شوف صفحتي</a></div></section>
+    <div class="tabs" id="tb"></div><div id="tc"></div>`);
+  const tabsHtml = () => { const n = arr(D.reqs).filter(r => r.status === "pending").length; $("tb").innerHTML = tabs.map(([k, t, i]) => `<a href="#/studio/${k}" class="${k === tab ? "on" : ""}">${ic(i)}${t}${k === "req" && n ? `<span class="cnt">${n}</span>` : ""}</a>`).join("") };
+  const T = $("tc");
+  if (tab === "req") {
+    paint = () => { tabsHtml();
+      T.innerHTML = arr(D.reqs).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)).map(r => `<div class="card rq"><div class="row between"><b>${esc(r.title)}</b><span class="chip ${r.status === "approved" ? "ok" : r.status === "rejected" ? "no" : "wait"}">${r.status === "approved" ? "تمت الموافقة" : r.status === "rejected" ? "مرفوض" : "قيد المراجعة"}</span></div>
+        <div class="kv"><div><span>الطالب</span><b>${esc(r.name)}</b></div><div><span>الموبايل</span><b dir="ltr">${esc(r.phone)}</b></div><div><span>الإيميل</span><b dir="ltr">${esc(r.email)}</b></div><div><span>المبلغ</span><b>${money(r.amount)}</b></div><div><span>النوع</span><b>${r.type === "course" ? "كورس كامل" : "حصة"}</b></div><div><span>التاريخ</span><b>${day(r.createdAt)}</b></div></div>
+        ${r.reason ? `<p class="mut" style="margin-bottom:10px">سبب الرفض: ${esc(r.reason)}</p>` : ""}
+        <div class="row"><button class="btn ghost sm" data-v="${r.id}">${ic("image")}صورة التحويل</button>${r.status === "pending" ? `<button class="btn sm" data-ok="${r.id}">${ic("check")}موافقة</button><button class="btn danger sm" data-no="${r.id}">${ic("x")}رفض</button>` : ""}</div></div>`).join("") || emptyBox("bell", "مفيش طلبات اشتراك لسه.");
+    };
+    T.onclick = safe(async e => { const b = e.target.closest("button"); if (!b) return; const id = b.dataset.v || b.dataset.ok || b.dataset.no, r = D.reqs[id] && { id, ...D.reqs[id] }; if (!r) return;
+      const mail = (s, m) => r.email ? sendMail(EMAILJS.approval, { to_email: r.email, to_name: r.name, subject: s, message: m }) : false;
+      if (b.dataset.v) { modal(`${head("صورة التحويل")}<p class="mut">لحظة…</p>`); const v = (await get(ref(db, "receipts/" + id))).val(); modal(`${head("صورة التحويل")}${v ? `<img src="${v.img}" style="max-width:100%;border-radius:14px" alt="">` : '<p class="empty">الصورة مش موجودة.</p>'}`) }
+      if (b.dataset.ok) { b.disabled = true; const key = r.type === "course" ? r.courseId : r.lectureId;
+        await update(ref(db), { [`enrollments/${r.uid}/${key}`]: { teacherId: U.uid, courseId: r.courseId, lectureId: r.lectureId || null, at: serverTimestamp() }, [`requests/${U.uid}/${id}/status`]: "approved", [`requests/${U.uid}/${id}/decidedAt`]: serverTimestamp(), [`studentRequests/${r.uid}/${id}/status`]: "approved" });
+        const sent = await mail("تمت الموافقة على اشتراكك", `تمت الموافقة على طلبك للاشتراك في "${r.title}". تقدر تدخل المنصة وتبدأ المشاهدة دلوقتي.`); toast(sent ? "تمت الموافقة وبعتنا رسالة للطالب" : "تمت الموافقة (الرسالة ماتبعتتش، راجع EmailJS)") }
+      if (b.dataset.no) { const v = await ask("رفض الطلب", [{ k: "reason", label: "سبب الرفض (هيظهر للطالب)", req: 1 }], "رفض"); if (!v) return;
+        await update(ref(db), { [`requests/${U.uid}/${id}/status`]: "rejected", [`requests/${U.uid}/${id}/reason`]: v.reason, [`requests/${U.uid}/${id}/decidedAt`]: serverTimestamp(), [`studentRequests/${r.uid}/${id}/status`]: "rejected", [`studentRequests/${r.uid}/${id}/reason`]: v.reason });
+        await mail("بخصوص طلب اشتراكك", `للأسف تعذّر قبول طلبك للاشتراك في "${r.title}". السبب: ${v.reason}.`); toast("تم الرفض") } });
   }
+  if (tab === "courses") {
+    paint = again => { tabsHtml(); const cs = coursesOf(U.uid);
+      T.innerHTML = `<div class="grid"><button class="card cc" id="nc" style="min-height:240px;align-items:center;justify-content:center;gap:10px;cursor:pointer;border:2px dashed #cfd5ea;box-shadow:none;background:rgba(255,255,255,.6);color:var(--p);font-weight:700">${ic("plus")}<span>كورس جديد</span></button>${cs.map(courseCard).join("")}</div>`;
+      $("nc").onclick = addCourse; reveal(true) };
+  }
+  if (tab === "students") {
+    T.innerHTML = `<div class="sh"><h2>المشاهدات</h2></div><div class="srch" style="max-width:none;margin-bottom:14px">${ic("search")}<input id="q" placeholder="ابحث باسم الطالب أو الحصة"></div><div class="card tw" id="vw"></div><div class="sh" style="margin-top:34px"><h2>الطلاب المشتركين</h2></div><div class="card tw" id="st"></div>`;
+    paint = () => { tabsHtml(); const f = $("q").value.trim().toLowerCase();
+      $("vw").innerHTML = `<table><thead><tr><th>الطالب</th><th>الكورس</th><th>الحصة</th><th>المشاهدات</th><th>آخر مشاهدة</th></tr></thead><tbody>${arr(D.views).filter(v => !f || (v.name + " " + v.lt + " " + v.ct).toLowerCase().includes(f)).sort((a, b) => (b.last || 0) - (a.last || 0)).map(v => `<tr><td>${esc(v.name)}</td><td>${esc(v.ct)}</td><td>${esc(v.lt)}</td><td>${v.count || 1}</td><td>${day(v.last)}</td></tr>`).join("") || '<tr><td colspan="5" class="mut">مفيش مشاهدات.</td></tr>'}</tbody></table>`;
+      const m = {}; arr(D.reqs).filter(r => r.status === "approved").forEach(r => { (m[r.uid] ||= { name: r.name, phone: r.phone, email: r.email, n: 0 }).n++ });
+      $("st").innerHTML = `<table><thead><tr><th>الاسم</th><th>الموبايل</th><th>الإيميل</th><th>اشتراكات</th></tr></thead><tbody>${Object.values(m).map(s => `<tr><td>${esc(s.name)}</td><td dir="ltr">${esc(s.phone)}</td><td dir="ltr">${esc(s.email)}</td><td>${s.n}</td></tr>`).join("") || '<tr><td colspan="4" class="mut">مفيش طلاب لسه.</td></tr>'}</tbody></table>` };
+    $("q").oninput = () => paint();
+  }
+  if (tab === "page") {
+    const t = D.teachers[U.uid] || {}, pay = t.pay || {}, ms = Object.values(pay.methods || {}), link = location.origin + location.pathname + "#/t/" + U.uid;
+    T.innerHTML = `<div class="two"><div class="card pad"><h3>بيانات صفحتي</h3>
+      <div class="fld"><label for="s-n">الاسم</label><input id="s-n" value="${esc(t.name || P.name)}"></div><div class="fld"><label for="s-t">التخصص</label><input id="s-t" value="${esc(t.title || "")}" placeholder="مثال: مدرس رياضيات"></div>
+      <div class="fld"><label for="s-b">نبذة عنك</label><textarea id="s-b" rows="4">${esc(t.bio || "")}</textarea></div><div class="fld"><label for="s-p">صورتك الشخصية</label><input id="s-p" type="file" accept="image/*"></div>
+      <div class="fld"><label>رابط صفحتك</label><div class="row"><input readonly dir="ltr" value="${esc(link)}" style="flex:1;min-width:180px"><button class="btn ghost sm" id="cl">${ic("copy")}نسخ</button></div></div>
+      <button class="btn" id="sv">حفظ البيانات</button></div>
+      <div><div class="card pad" style="margin-bottom:20px"><h3>طرق الدفع</h3>${[0, 1, 2].map(i => `<div class="row" style="margin-bottom:10px"><input style="flex:1;min-width:130px" id="pn${i}" placeholder="الطريقة (فودافون كاش)" value="${esc(ms[i]?.name || "")}"><input style="flex:1;min-width:130px" dir="ltr" id="pm${i}" placeholder="الرقم" value="${esc(ms[i]?.number || "")}"></div>`).join("")}
+        <div class="fld"><label for="pi">رسالة الدفع للطالب (اختياري)</label><textarea id="pi" rows="3">${esc(pay.instructions || "")}</textarea></div><button class="btn" id="sp">حفظ طرق الدفع</button></div>
+      <div class="card pad"><h3>تغيير الباسوورد</h3><div class="fld"><label for="po">الحالي</label><input id="po" type="password" autocomplete="current-password"></div><div class="fld"><label for="pn">الجديد</label><input id="pnw" type="password" autocomplete="new-password"></div><button class="btn ghost" id="cp">تغيير الباسوورد</button></div></div></div>`;
+    paint = () => tabsHtml();
+    $("cl").onclick = () => { navigator.clipboard.writeText(link); toast("تم نسخ الرابط") };
+    $("sv").onclick = safe(async () => { const name = $("s-n").value.trim(); if (name.length < 2) return toast("اكتب الاسم", false);
+      const u = { [`teachers/${U.uid}/name`]: name, [`teachers/${U.uid}/title`]: $("s-t").value.trim(), [`teachers/${U.uid}/bio`]: $("s-b").value.trim(), [`users/${U.uid}/name`]: name }; const f = $("s-p").files[0]; if (f) u[`teachers/${U.uid}/photo`] = await compress(f, 400, .75);
+      await update(ref(db), u); P.name = name; toast("تم حفظ بيانات الصفحة") });
+    $("sp").onclick = safe(async () => { const methods = [0, 1, 2].map(i => ({ name: $("pn" + i).value.trim(), number: $("pm" + i).value.trim() })).filter(m => m.number);
+      await update(ref(db), { [`teachers/${U.uid}/pay`]: { instructions: $("pi").value.trim(), methods: methods.length ? methods : null } }); toast("تم حفظ طرق الدفع") });
+    $("cp").onclick = safe(async () => { try { await reauthenticateWithCredential(U, EmailAuthProvider.credential(U.email, $("po").value)); await updatePassword(U, $("pnw").value); $("po").value = $("pnw").value = ""; toast("تم تغيير الباسوورد") }
+      catch (e) { toast(e.code === "auth/weak-password" ? "الباسوورد الجديد ضعيف" : "الباسوورد الحالي غلط", false) } });
+  }
+  paint();
 }
 
-// ---------- حسابي ----------
-async function account(){
-  if(!U){ $("view").innerHTML = '<main class="wrap"><p class="empty">سجّل دخول عشان تشوف حسابك.</p><button class="btn pencil" id="lg">دخول / حساب جديد</button></main>'; $("lg").onclick = () => openAuth(); return }
-  const st = (await getDoc(doc(db,"students",U.uid))).data() || {};
-  const reqs = (await getDocs(query(collection(db,"requests"), where("uid","==",U.uid)))).docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-  const enr = (await getDocs(query(collection(db,"enrollments"), where("uid","==",U.uid)))).docs.map(d=>d.data());
-  const cs = await Promise.all([...new Set(enr.map(e=>e.courseId))].map(async k => ({id:k, ...(await getDoc(doc(db,"courses",k))).data()})));
-  const lab = {pending:["wait","قيد المراجعة"], approved:["ok","تمت الموافقة"], rejected:["no","مرفوض"]};
-  $("view").innerHTML = `<main class="wrap"><h1 style="margin:0 0 4px">أهلاً ${esc(st.name||"")}</h1><p class="mut">${esc(U.email)}</p>
-    <h2>كورساتي</h2><div class="grid">${cs.map(c=>`<a class="card course" href="#/course/${c.id}"><div class="tx"><h3>${esc(c.title)}</h3><p>كمّل المشاهدة</p></div></a>`).join("") || '<p class="empty">لسه مفيش اشتراكات مفعّلة.</p>'}</div>
-    <h2>طلبات الاشتراك</h2><div class="card">${reqs.map(r=>`<div class="lec"><div><b>${esc(r.title)}</b><br><span class="mut">${money(r.amount)}${r.reason ? " — " + esc(r.reason) : ""}</span></div><span class="chip ${lab[r.status][0]}">${lab[r.status][1]}</span></div>`).join("") || '<p class="empty">مفيش طلبات لسه.</p>'}</div>
-    <h2>الباسوورد</h2><button class="btn ghost" id="rp">ابعتلي لينك تغيير الباسوورد على الإيميل</button></main>`;
-  $("rp").onclick = async () => { try{ await sendPasswordResetEmail(auth, U.email); toast("بعتنا اللينك على إيميلك") }catch{ toast("مقدرناش نبعت الرسالة", false) } };
-}
-
-(async () => {
-  try{ const s = await getDoc(doc(db,"settings","site")); if(s.exists()) SITE = s.data() }catch{}
-  $("cl").onclick = () => $("dlg").close(); $("dlg").onclose = () => $("db").innerHTML = "";
-  onAuthStateChanged(auth, u => { U = u; document.querySelectorAll("dialog[open]").forEach(d => d.close()); renderNav(); route() });
-  addEventListener("hashchange", route);
-})();
-</script></body></html>
+/* ============ البداية ============ */
+onAuthStateChanged(auth, u => { if (holding) return; if (u) { if (!U || U.uid !== u.uid) enter(u).catch(e => { console.error(e); toast("تعذّر تحميل البيانات. اتأكد من databaseURL والرولز", false); signOut(auth) }) } else leave() });
+</script>
+</body>
+</html>
