@@ -1,1 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<title>الكورسات</title>
+<style>
+:root{--bg:#eef3f1;--card:#fff;--ink:#10201d;--mut:#5d706b;--line:#d5e0dc;--board:#17352f;--board2:#10261f;--pencil:#f5c542;--err:#c0392b;--ok:#1d7a4f}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1715;--card:#15231f;--ink:#e8f0ed;--mut:#8fa59f;--line:#263a35;--err:#ff8a7a;--ok:#5fd39b}}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Cairo",system-ui,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit}
+.nav{background:linear-gradient(160deg,var(--board),var(--board2));color:#f1f5f2;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;border-bottom:6px solid #7a5a35;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.brand{font-family:"Reem Kufi","Cairo",sans-serif;font-weight:700;font-size:1.4rem;color:#fff;text-decoration:none;margin-inline-end:auto}
+.nav a.l{color:#c4d6d0;text-decoration:none;font-weight:600}
+.hero{background:linear-gradient(160deg,var(--board),var(--board2));color:#f1f5f2;padding:44px 20px 70px;text-align:right}
+.hero>div{max-width:1000px;margin:0 auto}
+.hero h1{font-family:"Reem Kufi","Cairo",sans-serif;font-size:clamp(2rem,6vw,3.4rem);margin:0 0 10px;line-height:1.25}
+.hero p{margin:0 0 22px;max-width:36rem;color:#c4d6d0;font-size:1.1rem;line-height:1.8}
+.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 50px}
+.up{margin-top:-36px}
+h2{margin:26px 0 12px;font-size:1.25rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.course{padding:0;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;border-top:5px solid var(--pencil)}
+.course .im{aspect-ratio:16/9;width:100%;object-fit:cover;background:linear-gradient(160deg,var(--board),var(--board2));display:flex;align-items:center;justify-content:center;color:var(--pencil);font:700 3rem "Reem Kufi",sans-serif}
+.course .tx{padding:14px}.course h3{margin:0 0 6px}.course p{margin:0;color:var(--mut);font-size:.93rem;line-height:1.7}
+.btn{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:8px;padding:9px 15px;background:var(--board);color:#fff;text-decoration:none;display:inline-block}
+.btn.pencil{background:var(--pencil);color:#2a2200}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.nav .btn.ghost{color:#fff;border-color:#ffffff66}
+.btn.danger{background:transparent;color:var(--err);border:1px solid var(--err)}
+.btn:disabled{opacity:.6;cursor:wait}
+:focus-visible{outline:3px solid var(--pencil);outline-offset:2px}
+label{display:block;font-weight:600;margin:0 0 4px;font-size:.92rem}
+input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;margin-bottom:10px}
+select option{color:#000}
+dialog{border:0;border-radius:14px;padding:18px;width:min(560px,94vw);background:var(--card);color:var(--ink);max-height:92vh;overflow:auto}
+dialog::backdrop{background:rgba(5,15,12,.65)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mut{color:var(--mut)}.empty{color:var(--mut);padding:16px 0}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.85rem;font-weight:700;background:var(--line)}
+.chip.ok{background:var(--ok);color:#fff}.chip.no{background:var(--err);color:#fff}.chip.wait{background:var(--pencil);color:#2a2200}
+.lec{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+.lec:last-child{border:0}
+.video{position:relative;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pm{border:1px dashed var(--mut);border-radius:10px;padding:10px;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.num{font:700 1.15rem ui-monospace,Consolas,monospace;direction:ltr;letter-spacing:1px}
+.prev{max-width:100%;max-height:260px;border-radius:8px;margin-bottom:10px}
+.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:420px;margin:auto;padding:12px 16px;border-radius:10px;color:#fff;font-weight:600;z-index:99;text-align:center}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{text-align:right;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-size:.9rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.tabs .btn[aria-selected=true]{background:var(--pencil);color:#2a2200}
+.hide{display:none!important}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
+.foot{text-align:center;padding:26px 16px calc(26px + env(safe-area-inset-bottom,0px));color:var(--mut)}.foot a{color:var(--mut)}
+</style></head><body>
+<div id="nav"></div>
+<div id="view"><main class="wrap"><p class="empty">جاري التحميل…</p></main></div>
+<footer class="foot"><a href="admin.html">دخول المعلمة</a></footer>
+<dialog id="dlg"><div id="db"></div><div class="row" style="margin-top:12px"><button class="btn ghost" id="cl">إغلاق</button></div></dialog>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc, query, where, orderBy, serverTimestamp, increment } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const cfg = {
+  apiKey: "AIzaSyCULtaLm5UC36yBNibAFI4Lq2AebN6YvjE",
+  authDomain: "education-ea665.firebaseapp.com",
+  projectId: "education-ea665",
+  storageBucket: "education-ea665.firebasestorage.app",
+  messagingSenderId: "569337898526",
+  appId: "1:569337898526:web:7cc09f35b3f357fb7b300f"
+};
+const app = initializeApp(cfg), auth = getAuth(app), db = getFirestore(app);
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => n ? n + " ج.م" : "مجاني";
+function embed(url){
+  let m = url.match(/drive\.google\.com\/file\/d\/([^/?]+)/); if(m) return `https://drive.google.com/file/d/${m[1]}/preview`;
+  m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/); if(m) return `https://www.youtube-nocookie.com/embed/${m[1]}?rel=0&modestbranding=1`;
+  return url;
+}
+function toast(t, ok = true){
+  const d = document.createElement("div"); d.className = "toast"; d.setAttribute("role","status");
+  d.style.background = ok ? "var(--ok)" : "var(--err)"; d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 4200);
+}
+function compress(file, w = 900, q = .6){
+  return new Promise(res => { const r = new FileReader();
+    r.onload = () => { const i = new Image(); i.onload = () => { const k = Math.min(1, w / i.width), c = document.createElement("canvas");
+      c.width = i.width * k; c.height = i.height * k; c.getContext("2d").drawImage(i, 0, 0, c.width, c.height); res(c.toDataURL("image/jpeg", q)) }; i.src = r.result };
+    r.readAsDataURL(file) });
+}
+const EMAILJS = { service: "service_6boa519", publicKey: "_YXlKwxDWLdxG-_DB", approval: "template_g9kjv6u", welcome: "template_898wgo5" };
+async function sendMail(template, params){
+  try{ const r = await fetch("https://api.emailjs.com/api/v1.0/email/send", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({service_id:EMAILJS.service, template_id:template, user_id:EMAILJS.publicKey, template_params:params})}); return r.ok }catch{ return false }
+}
+
+let U, SITE = {};
+const NAME = () => SITE.schoolName || "منصة المعلمة";
+
+function renderNav(){
+  document.title = NAME(); $("nav").className = "nav";
+  $("nav").innerHTML = `<a class="brand" href="#/">${esc(NAME())}</a><a class="l" href="#/">الكورسات</a><a class="l" href="#/account">حسابي</a>
+    <button class="btn ${U ? "ghost" : "pencil"}" id="authBtn">${U ? "خروج" : "دخول / حساب جديد"}</button>`;
+  $("authBtn").onclick = () => U ? signOut(auth) : openAuth();
+}
+
+// ---------- تسجيل الدخول / حساب جديد ----------
+let adlg;
+function openAuth(msg = ""){
+  if(!adlg){
+    adlg = document.createElement("dialog");
+    adlg.innerHTML = `<div class="tabs"><button class="btn" id="tL" aria-selected="true">دخول</button><button class="btn" id="tS" aria-selected="false">حساب جديد</button></div>
+    <div id="sf" class="hide"><label for="a-name">الاسم بالكامل</label><input id="a-name" autocomplete="name">
+      <label for="a-nid">الرقم القومي (14 رقم)</label><input id="a-nid" dir="ltr" inputmode="numeric" maxlength="14">
+      <label for="a-phone">رقم الموبايل</label><input id="a-phone" dir="ltr" inputmode="tel" autocomplete="tel"></div>
+    <label for="a-email">الإيميل</label><input id="a-email" type="email" dir="ltr" autocomplete="username">
+    <label for="a-pass">الباسوورد (6 حروف على الأقل)</label><input id="a-pass" type="password" autocomplete="current-password">
+    <p id="a-msg" style="color:var(--err);font-weight:600;min-height:1.3em;margin:0 0 10px"></p>
+    <div class="row"><button class="btn pencil" id="a-go">دخول</button><button class="btn ghost" id="a-fp">نسيت الباسوورد؟</button><button class="btn ghost" id="a-x">إلغاء</button></div>
+    <p class="mut" style="font-size:.85rem;margin:10px 0 0">بياناتك (الاسم والرقم القومي) بتتستخدم لتفعيل اشتراكك فقط ومش بتتعرض لحد غير المعلمة.</p>`;
+    document.body.append(adlg);
+    let signup = false; const m = () => $("a-msg"), bad = t => { m().style.color = "var(--err)"; m().textContent = t };
+    const set = s => { signup = s; $("sf").classList.toggle("hide", !s); $("a-go").textContent = s ? "إنشاء الحساب" : "دخول"; $("a-fp").classList.toggle("hide", s);
+      $("tL").setAttribute("aria-selected", !s); $("tS").setAttribute("aria-selected", s); m().textContent = "" };
+    $("tL").onclick = () => set(false); $("tS").onclick = () => set(true); $("a-x").onclick = () => adlg.close();
+    $("a-fp").onclick = async () => { const e = $("a-email").value.trim(); if(!e) return bad("اكتب إيميلك الأول وبعدين دوس نسيت الباسوورد");
+      try{ await sendPasswordResetEmail(auth, e); m().style.color = "var(--ok)"; m().textContent = "بعتنا لينك تغيير الباسوورد على إيميلك. راجع الـ Spam كمان." }catch{ bad("مقدرناش نبعت الرسالة. اتأكد من الإيميل") } };
+    $("a-go").onclick = async () => {
+      const email = $("a-email").value.trim(), pass = $("a-pass").value; m().textContent = "";
+      try{
+        if(!signup){ await signInWithEmailAndPassword(auth, email, pass); return }
+        const name = $("a-name").value.trim(), nid = $("a-nid").value.trim(), phone = $("a-phone").value.trim();
+        if(name.split(/\s+/).length < 2) return bad("اكتب اسمك الثنائي على الأقل");
+        if(!/^[23]\d{13}$/.test(nid)) return bad("الرقم القومي لازم يكون 14 رقم صحيح");
+        const cr = await createUserWithEmailAndPassword(auth, email, pass);
+        await setDoc(doc(db, "students", cr.user.uid), { name, nationalId: nid, phone, email, createdAt: serverTimestamp() });
+        sendMail(EMAILJS.welcome, { to_email: email, to_name: name });
+      }catch(e){ bad(({"auth/invalid-credential":"الإيميل أو الباسوورد غلط","auth/email-already-in-use":"الإيميل ده مسجل قبل كده، سجّل دخول","auth/weak-password":"الباسوورد ضعيف، استخدم 6 حروف على الأقل","auth/invalid-email":"الإيميل مش مكتوب صح"})[e.code] || "حصل خطأ، حاول تاني") }
+    };
+  }
+  $("a-msg").textContent = msg; adlg.showModal();
+}
+
+// ---------- الراوتر ----------
+function route(){
+  const h = location.hash, m = h.match(/^#\/course\/(.+)$/); scrollTo(0, 0);
+  if(m) course(m[1]); else if(h === "#/account") account(); else home();
+}
+
+// ---------- الرئيسية ----------
+async function home(){
+  $("view").innerHTML = `<section class="hero"><div><h1>${esc(NAME())}</h1><p>${esc(SITE.tagline || "كورسات مسجّلة بشرح مبسّط، تشوفها في أي وقت ومن أي مكان.")}</p><button class="btn pencil" id="go">شوف الكورسات</button></div></section>
+  <main class="wrap up"><h2 id="courses" style="margin-top:0;color:var(--ink)">الكورسات</h2><div id="list" class="grid"><p class="empty">جاري التحميل…</p></div>
+    <h2>إزاي تشترك؟</h2><div class="grid">
+      <div class="card"><h3>1. اعمل حساب</h3><p class="mut">سجّل باسمك ورقمك القومي وإيميلك مرة واحدة.</p></div>
+      <div class="card"><h3>2. حوّل وارفع الصورة</h3><p class="mut">اختار الكورس، حوّل المبلغ على رقم المعلمة، وارفع صورة التحويل من نفس الصفحة.</p></div>
+      <div class="card"><h3>3. استنى الموافقة</h3><p class="mut">المعلمة بتراجع الطلب وتفعّل اشتراكك، وهتوصلك رسالة على الإيميل.</p></div></div></main>`;
+  $("go").onclick = () => $("courses").scrollIntoView({behavior:"smooth"});
+  try{
+    const s = await getDocs(query(collection(db,"courses"), orderBy("position")));
+    $("list").innerHTML = s.docs.map(d => { const c = d.data();
+      return `<a class="card course" href="#/course/${d.id}">${c.image ? `<img class="im" src="${c.image}" alt="">` : `<div class="im">${esc(c.title[0])}</div>`}
+        <div class="tx"><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p></div></a>` }).join("") || '<p class="empty">الكورسات هتظهر هنا أول ما المعلمة تضيفها.</p>';
+  }catch{ $("list").innerHTML = '<p class="empty">مقدرناش نحمّل الكورسات. جرّب تاني.</p>' }
+}
+
+// ---------- صفحة الكورس ----------
+async function course(id){
+  $("view").innerHTML = '<main class="wrap"><p class="empty">جاري التحميل…</p></main>';
+  const cs = await getDoc(doc(db,"courses",id)).catch(() => null);
+  if(!cs || !cs.exists()){ $("view").innerHTML = '<main class="wrap"><p class="empty">الكورس ده مش موجود. <a href="#/">ارجع للكورسات</a></p></main>'; return }
+  const c = cs.data(); document.title = c.title + " | " + NAME();
+  const ls = (await getDocs(query(collection(db,"lectures"), where("courseId","==",id)))).docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.position||0)-(b.position||0));
+  const enr = new Set();
+  if(U) (await getDocs(query(collection(db,"enrollments"), where("uid","==",U.uid)))).docs.forEach(d=>enr.add(d.id));
+  const hasAll = U && enr.has(U.uid+"_"+id), unlocked = l => !l.price || hasAll || (U && enr.has(U.uid+"_"+l.id));
+  const total = ls.reduce((s,l)=>s+(l.price||0),0), dlg = $("dlg");
+  $("view").innerHTML = `<main class="wrap" id="main"><a href="#/" class="mut">← كل الكورسات</a>
+    ${c.image ? `<img class="prev" style="width:100%;max-height:340px;object-fit:cover;margin-top:10px" src="${c.image}" alt="">` : ""}
+    <h1 style="margin:10px 0 6px">${esc(c.title)}</h1><p class="mut" style="line-height:1.8">${esc(c.description)}</p>
+    ${hasAll ? '<span class="chip ok">أنت مشترك في الكورس كله</span>' : total ? `<div class="row"><b>سعر الكورس كله: ${money(total)}</b><button class="btn pencil" id="subAll">اشترك في الكورس</button></div>` : ""}
+    <h2>الحصص</h2><div class="card">${ls.map(l=>`<div class="lec"><div><b>${esc(l.title)}</b> <span class="chip ${unlocked(l)?"ok":""}">${unlocked(l)?"متاحة":money(l.price)}</span><br><span class="mut">${esc(l.description)}</span></div>
+      <div class="row">${unlocked(l) ? `<button class="btn" data-w="${l.id}">شاهد</button>` : `<button class="btn pencil" data-s="${l.id}">اشترك في الحصة</button><button class="btn ghost" data-c="${l.id}">عندي كود</button>`}</div></div>`).join("") || '<p class="empty">لسه مفيش حصص في الكورس ده.</p>'}</div></main>`;
+
+  const need = () => { if(U) return true; openAuth("سجّل دخول الأول عشان تكمل."); return false }, byId = k => ls.find(l=>l.id===k);
+  const video = (l, url) => { $("db").innerHTML = `<h3 style="margin-top:0">${esc(l.title)}</h3><div class="video"><iframe src="${esc(embed(url))}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+    setDoc(doc(db,"views",U.uid+"_"+l.id), {uid:U.uid, lectureId:l.id, courseId:id, count:increment(1), last:serverTimestamp()}, {merge:true}).catch(()=>{}) };
+
+  $("main").onclick = async e => {
+    const b = e.target.closest("button"); if(!b) return;
+    if(b.id === "subAll"){ if(need()) subscribe({type:"course", title:c.title, amount:total}) }
+    if(b.dataset.s){ const l = byId(b.dataset.s); if(need()) subscribe({type:"lecture", lectureId:l.id, title:l.title, amount:l.price}) }
+    if(b.dataset.w){ if(!need()) return; const l = byId(b.dataset.w); dlg.showModal(); $("db").textContent = "لحظة…";
+      try{ video(l, (await getDoc(doc(db,"videos",l.id))).data().videoUrl) }catch{ $("db").textContent = "مقدرناش نفتح الفيديو. لو اشتركت من شوية جرّب تحدّث الصفحة." } }
+    if(b.dataset.c){ if(!need()) return; const l = byId(b.dataset.c); dlg.showModal();
+      $("db").innerHTML = `<h3 style="margin-top:0">${esc(l.title)}</h3><label for="cd">كود الحصة</label><input id="cd" dir="ltr" maxlength="12" autocomplete="off"><p id="ce" style="color:var(--err);font-weight:600;margin:0 0 10px"></p><button class="btn pencil" id="cg">شاهد</button>`;
+      $("cg").onclick = async () => { const k = $("cd").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");
+        try{ const s = await getDoc(doc(db,"unlock",k)); if(s.exists() && s.data().lectureId===l.id) return video(l, s.data().videoUrl) }catch{}
+        $("ce").textContent = "الكود غلط أو اتغيّر. راجع المعلمة." } }
+  };
+
+  async function subscribe(it){
+    let pay = {methods:[], instructions:""}; try{ const s = await getDoc(doc(db,"settings","payment")); if(s.exists()) pay = s.data() }catch{}
+    const ms = (pay.methods||[]).filter(m=>m.number);
+    $("db").innerHTML = `<h3 style="margin-top:0">اشتراك: ${esc(it.title)}</h3><p>المبلغ المطلوب: <b>${money(it.amount)}</b></p>
+      <p class="mut" style="line-height:1.8">${esc(pay.instructions || "حوّل المبلغ على أحد الأرقام التالية، وبعدها صوّر شاشة التحويل بوضوح بحيث يظهر المبلغ ورقم العملية، وارفعها هنا. هنراجع طلبك ونفعّل اشتراكك في أقرب وقت.")}</p>
+      ${ms.map(m=>`<div class="pm"><div>${esc(m.name)}<br><span class="num">${esc(m.number)}</span></div><button class="btn ghost" data-cp="${esc(m.number)}">نسخ الرقم</button></div>`).join("") || '<p class="empty">المعلمة لسه ماضافتش طرق دفع. كلّمها مباشرة.</p>'}
+      <label for="shot" style="margin-top:12px">صورة التحويل</label><input id="shot" type="file" accept="image/*"><img id="pv" class="prev hide" alt="">
+      <button class="btn pencil" id="send" disabled>إرسال الطلب</button>`;
+    dlg.showModal(); let img = null;
+    $("db").onclick = e => { const b = e.target.closest("[data-cp]"); if(b){ navigator.clipboard.writeText(b.dataset.cp); toast("تم نسخ الرقم") } };
+    $("shot").onchange = async e => { if(!e.target.files[0]) return; img = await compress(e.target.files[0]); $("pv").src = img; $("pv").classList.remove("hide"); $("send").disabled = false };
+    $("send").onclick = async () => { $("send").disabled = true;
+      try{ await addDoc(collection(db,"requests"), {uid:U.uid, type:it.type, courseId:id, lectureId:it.lectureId||null, title:it.title, amount:it.amount, screenshot:img, status:"pending", createdAt:serverTimestamp()});
+        dlg.close(); toast("وصل طلبك. هتوصلك رسالة على الإيميل أول ما المعلمة توافق.") }
+      catch{ toast("مقدرناش نبعت الطلب، جرّب تاني", false); $("send").disabled = false } };
+  }
+}
+
+// ---------- حسابي ----------
+async function account(){
+  if(!U){ $("view").innerHTML = '<main class="wrap"><p class="empty">سجّل دخول عشان تشوف حسابك.</p><button class="btn pencil" id="lg">دخول / حساب جديد</button></main>'; $("lg").onclick = () => openAuth(); return }
+  const st = (await getDoc(doc(db,"students",U.uid))).data() || {};
+  const reqs = (await getDocs(query(collection(db,"requests"), where("uid","==",U.uid)))).docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  const enr = (await getDocs(query(collection(db,"enrollments"), where("uid","==",U.uid)))).docs.map(d=>d.data());
+  const cs = await Promise.all([...new Set(enr.map(e=>e.courseId))].map(async k => ({id:k, ...(await getDoc(doc(db,"courses",k))).data()})));
+  const lab = {pending:["wait","قيد المراجعة"], approved:["ok","تمت الموافقة"], rejected:["no","مرفوض"]};
+  $("view").innerHTML = `<main class="wrap"><h1 style="margin:0 0 4px">أهلاً ${esc(st.name||"")}</h1><p class="mut">${esc(U.email)}</p>
+    <h2>كورساتي</h2><div class="grid">${cs.map(c=>`<a class="card course" href="#/course/${c.id}"><div class="tx"><h3>${esc(c.title)}</h3><p>كمّل المشاهدة</p></div></a>`).join("") || '<p class="empty">لسه مفيش اشتراكات مفعّلة.</p>'}</div>
+    <h2>طلبات الاشتراك</h2><div class="card">${reqs.map(r=>`<div class="lec"><div><b>${esc(r.title)}</b><br><span class="mut">${money(r.amount)}${r.reason ? " — " + esc(r.reason) : ""}</span></div><span class="chip ${lab[r.status][0]}">${lab[r.status][1]}</span></div>`).join("") || '<p class="empty">مفيش طلبات لسه.</p>'}</div>
+    <h2>الباسوورد</h2><button class="btn ghost" id="rp">ابعتلي لينك تغيير الباسوورد على الإيميل</button></main>`;
+  $("rp").onclick = async () => { try{ await sendPasswordResetEmail(auth, U.email); toast("بعتنا اللينك على إيميلك") }catch{ toast("مقدرناش نبعت الرسالة", false) } };
+}
+
+(async () => {
+  try{ const s = await getDoc(doc(db,"settings","site")); if(s.exists()) SITE = s.data() }catch{}
+  $("cl").onclick = () => $("dlg").close(); $("dlg").onclose = () => $("db").innerHTML = "";
+  onAuthStateChanged(auth, u => { U = u; document.querySelectorAll("dialog[open]").forEach(d => d.close()); renderNav(); route() });
+  addEventListener("hashchange", route);
+})();
+</script></body></html>
